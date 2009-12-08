@@ -19,8 +19,8 @@ https://source.fluidproject.org/svn/LICENSE.txt
     // for the remainder of the directory name. i.e. C:\Documents and Settings/User/infusion-builder/
     // Do not use back slash as it get's mistaken for an escape character.
     //***Remember to end path names with a forward slash
-    define ("SECURE_PATH", "/path/to/infusion-builder-secure/");
-    define ("BUILDER_PATH", "/path/to/infusion-builder/");
+    define ("SECURE_PATH", "/path/to/infusionBuilder-secure/");
+    define ("BUILDER_PATH", "/path/to/infusionBuilder/");
     define("DB_USER", "mysql_user");
     define("DB_PASS", "mysql_password");
     
