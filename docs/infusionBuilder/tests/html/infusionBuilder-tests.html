@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr" id="html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Infusion Builder Tests</title>
+    
+    <!--  This is the jqUnit test css file -->
+    <link rel="Stylesheet" media="screen" href="../../infusion/src/webapp/tests/lib/qunit/css/testsuite.css" />
+    
+    <!--  These are the required javascript modules -->
+    <script type="text/javascript" src="../../infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/framework/core/js/Fluid.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/framework/core/js/DataBinding.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+    
+    <!--  These are the jqUnit test js files -->
+    <script type="text/javascript" src="../../infusion/src/webapp/tests/lib/jquery-ui/js/jquery.simulate.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/tests/lib/qunit/js/testrunner.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/tests/test-core/jqUnit/js/jqUnit.js"></script>
+
+    <!--  Include the javascript files you are testing here -->
+    <script type="text/javascript" src="../../js/infusionBuilder.js"></script>
+    
+    <!--  Include the javascript tests here -->
+    <script type="text/javascript" src="../../js/infusionBuilder-data.js"></script>
+    <script type="text/javascript" src="../js/infusionBuilder-tests.js"></script>
+  
+</head>
+
+<body id="body">
+    <h1 id="header">Infusion Builder Tests</h1>
+    <h2 id="banner"></h2>
+    <h2 id="userAgent"></h2>
+    <ol id="tests"></ol>
+
+    <!-- Test HTML. This will get populated from InfusionBuilder.html via a call to fetchTemplate() -->
+    <div id="main">
+    </div>
+</body>
+</html>

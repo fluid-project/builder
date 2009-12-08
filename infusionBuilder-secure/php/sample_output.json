@@ -1,0 +1,140 @@
+{
+	groups: [
+		{
+			"name": "Infusion Framework Modules",
+			"description": "",
+			"modules": ["framework", "fss", "fssReset","fssLayout","fssText", "fssThemes", "renderer"]
+		},
+		{
+			"name": "Infusion Component Modules",
+			"description": "",
+			"modules": ["inlineEdit", "pager", "progress","reorderer","tableOfContents", "uiOptions", "undo", "uploader"]
+		},
+		{
+			"name": "Third Party Modules",
+			"description": "",
+			"modules": ["fastXmlPull", "json", "jQuery", "jQueryUICore","jQueryUIWidgets", "jQueryTooltipPlugin", "swfupload", "swfobject"]
+		}
+	]
+,modules: {"framework": {
+   	"name": "Fluid Infusion Framework",
+   	"description": "The core of the Fluid Infusion framework. Required for all Fluid components",
+	"files": ["Fluid.js", "FluidDOMUtilities.js", "DataBinding.js", "jquery.keyboard-a11y.js"],
+	"dependencies": ["jQuery", "jQueryUICore", "jQueryDelegatePlugin"]
+},"fss": {
+   "name": "Fluid Skinning System",
+   "description": "A modular CSS framework, which allows you to add, remove, and mix classes to get the desired effect.",
+   "dependencies": ["fssReset", "fssLayout", "fssText", "fssThemes"]
+},"fssReset": {
+   	"name": "Reset",
+   	"description": "A css reset file based on the YUI reset.",
+	"cssFiles": "fss-reset.css"
+},"fssLayout": {
+	"name": "Layout",
+   	"description": "Provides css classes for layout and convenience classes for widgets.",
+	"cssFiles": "fss-layout.css"
+},"fssText": {
+   	"name": "Text",
+   	"description": "Classes for text, headers, spacing and sizes.",
+	"cssFiles": "fss-text.css"
+},"fssThemes": {
+   	"name": "Themes",
+   	"description": "Colour schemes for basic markup and widgets.",
+   	"cssFiles": ["fss-theme-coal.css", "fss-theme-debug.css", "fss-theme-hc.css", "fss-theme-hci.css", "fss-theme-mist.css", "fss-theme-rust.css", "fss-theme-slate.css"]
+},"renderer": {
+  	"name": "Renderer",
+   	"description": "Allows users to create user interface templates in pure HTML, and render the pages entirely on the client side.",
+	"files": ["fluidParser.js", "fluidRenderer.js"],
+	"dependencies": ["jQuery", "framework", "fastXmlPull"]
+},"inlineEdit": {
+  	"name": "Inline Edit",
+   	"description": "Allows a user to do quick edits to simple text directly on a web page. ",
+    "cssFiles": "InlineEdit.css",
+	"files": ["InlineEdit.js", "jquery.tinymce.js", "InlineEditIntegrations.js"],
+	"dependencies": ["jQuery", "jQueryTooltipPlugin", "framework", "undo"]
+},"pager": {
+   	"name": "Pager",
+   	"description": "Allows users to break up long lists of items into separate pages.",
+   	"cssFiles": "Pager.css",
+	"files": "Pager.js",
+	"dependencies": ["jQuery", "jQueryTooltipPlugin", "jQuerybgiframePlugin", "framework", "renderer"]
+},"progress": {
+   	"name": "Progress",
+   	"description": "A linear progress display.",
+	"files": "Progress.js",
+	"dependencies": ["jQuery", "jQueryUICore", "framework"]
+},"reorderer": {
+   	"name": "Reorderer",
+   	"description": "enables users to directly re-arrange content on the page.",
+  	"cssFiles": ["Reorderer.css", "ImageReorderer.css"],
+	"files": ["GeometricManager.js", "Reorderer.js", "ImageReorderer.js", "ModuleLayout.js", "LayoutReorderer.js"],
+	"dependencies": ["jQuery", "jQueryUICore", "jQueryUIWidgets", "framework"]
+},"tableOfContents": {
+   "name": "Table of Contents",
+   "description": "Constructs and displays a formatted list of links to all headers in a document.",
+   "files": "TableOfContents.js",
+   "dependencies": ["jQuery", "framework", "renderer"]
+},"uiOptions": {
+  	"name": "User Interface Options",
+   	"description": "Transforms the presentation of the user interface and content resources so that they are personalized to an individual user's needs.",
+   	"cssFiles": ["UIOptions.css", "Slider.css", "UIOptionsPreview.css"],
+	"files": ["UIEnhancer.js", "UIOptions.js"],
+	"dependencies": ["fss", "jQuery", "jQueryUICore", "framework", "renderer", "jQueryUIWidgets", "tableOfContents", "json"]
+},"undo": {
+  	"name": "Undo",
+	"description": "Provides undo support for any component that bears a model.",
+	"files": "Undo.js",
+	"dependencies": ["jQuery", "framework"]
+},"uploader": {
+ 	"name": "Uploader",
+   	"description": "Allows users to upload files.",
+   	"cssFiles": "Uploader.css",
+	"files": ["DemoUploadManager.js", "FileQueue.js", "Scroller.js", "SWFUploadManager.js", "Uploader.js"],
+	"dependencies": ["jQuery", "jQueryUICore", "framework", "swfobject", "swfupload", "progress"]
+},"fastXmlPull": {
+   	"name": "fastXmlPull",
+   	"description": "A fast xml pull parser.",
+	"files": "fastXmlPull.js"
+},"json": {
+   	"name": "JSON",
+   	"description": "Javascript lightweight data-interchange format.",
+	"files": "json2.js"
+},"jQuery": {
+   	"name": "jQuery",
+   	"description": "jQuery javascript library core.",
+	"files": "jquery.js"
+},"jQueryUICore": {
+   	"name": "jQuery UI Core",
+   	"description": "The core of jQuery UI, required for all jQuery UI interactions and widgets.",
+	"files": "ui.core.js",
+	"dependencies": "jQuery"
+},"jQueryUIWidgets": {
+   	"name": "jQuery UI Widgets",
+   	"description": "Full-featured jQuery UI Controls - each has a range of options and is fully themeable.",
+	"files": ["ui.dialog.js", "ui.draggable.js", "ui.accordion.js", "ui.slider.js"],
+	"dependencies": ["jQuery", "jQueryUICore"]
+},"jQueryDelegatePlugin": {
+    "name": "jQuery Delegate Plugin",
+    "description": "Used to simulate portable bubbling focus event",
+  "files": ["jquery.delegate.js"],
+  "dependencies": ["jQuery"]
+},"jQueryTooltipPlugin": {
+   	"name": "jQuery Tooltip Plugin",
+   	"description": "Allows tooltip customization.",
+   	"cssFiles": "jquery.tooltip.css",
+	"files": ["jquery.tooltip.js"],
+	"dependencies": ["jQuery", "jQueryUICore"]
+},"jQuerybgiframePlugin": {
+   	"name": "jQuery bgiframe Plugin",
+   	"description": "Used to handle zindex issues in IE6.",
+	"files": ["jquery.bgiframe.js"],
+	"dependencies": ["jQuery", "jQueryUICore"]
+},"swfupload": {
+   	"name": "SWFUpload",
+   	"description": "SWFUpload is a small JavaScript/Flash library featuring the great upload capabilities of Flash and the accessibility and ease of HTML/CSS.",
+	"files": "swfupload.js"
+},"swfobject": {
+   	"name": "swfobject",
+   	"description": "Embed Flash content into html.",
+	"files": "swfobject.js"
+}}}

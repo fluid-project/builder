@@ -1,0 +1,93 @@
+<project name="Deploy Infusion Builder" default="deploy">
+	<description>
+	</description>
+
+	<property environment="env" />
+	<property file="build.properties" />
+
+    <target name="setup_server_props" description="Loads server properties">
+        <property file="server_build.properties" />
+    </target>
+
+    <target name="setup_local" description="Loads local properties">
+        <property file="local_build.properties" />
+    </target>
+    
+	<target name="backup"
+		description="Backs up the infusion builder directories and database"
+		depends="timestamp">
+		<mkdir dir="${backup}/${MY_TODAY}" />
+		<move file="${secure_deploy}" todir="${backup}/${MY_TODAY}"
+			failonerror="false" />
+		<move file="${build_deploy}" todir="${backup}/${MY_TODAY}"
+			failonerror="false" />
+	</target>
+
+	<target name="timestamp" description="sets the time stamp properties">
+		<tstamp>
+			<format property="MY_TODAY" pattern="yyyy-MM-d_HH-mm-ss" />
+		</tstamp>
+	</target>
+
+	<target name="database_backup"
+		description="Backs up the mysql database and clears the database tables"
+		depends="timestamp">
+		<exec executable="mysqldump"
+			output="${backup}/${MY_TODAY}/${mysql_database_name}.sql">
+			<arg line="-u ${mysql_user}" />
+			<arg line="--password=${mysql_password}" />
+			<arg line="${mysql_database_name}" />
+		</exec>
+	</target>
+
+	<target name="database_create">
+		<exec executable="mysql" input="${basedir}/create-database-and-user.sql">
+			<arg line="-u ${mysql_user}" />
+			<arg line="--password=${mysql_password}" />
+		</exec>
+	</target>
+
+	<target name="database_setup">
+		<exec executable="mysql" input="${basedir}/create-and-clear-builder-cache.sql">
+			<arg line="-u ${mysql_user}" />
+			<arg line="--password=${mysql_password}" />
+		</exec>
+	</target>
+
+	<target name="setup" description="Puts new infusion builder directories in place">
+		<move file="../${build_directory}" todir="${deploy}" />
+		<move file="../${secure_directory}" todir="${deploy}" />
+	</target>
+
+	<target name="make_dirs">
+		<mkdir dir="${secure_tmp}" />
+		<mkdir dir="${secure_cache}" />
+	</target>
+
+	<target name="config"
+		description="Edits the config.php file and puts in the appropriate directories and mysql settings">
+		<replace file="${config_file}">
+			<replacefilter token="${secure_replace_token}" value="${secure_deploy}" />
+			<replacefilter token="${build_replace_token}" value="${build_deploy}" />
+			<replacefilter token="${mysql_username_replace_token}"
+				value="${mysql_user}" />
+			<replacefilter token="${mysql_password_replace_token}"
+				value="${mysql_password}" />
+		</replace>
+	</target>
+
+	<target name="cleanup" description="Removes unneeded directories after deploy">
+		<delete dir="${secure_tests}" />
+		<delete dir="${build_tests}" />
+	</target>
+
+
+	<target name="deploy" description="Deploy the Infusion Builder"
+		depends="setup_server_props, backup, database_backup, database_setup, setup, make_dirs, config, cleanup">
+	</target>
+
+	<target name="local_deploy" description="Deploy the Infusion Builder on your local machine"
+		depends="setup_local, database_setup, make_dirs, config">
+	</target>
+
+</project>

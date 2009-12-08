@@ -1,0 +1,20 @@
+{
+	information: {
+		groupNames: ["Infusion Framework Modules", "Infusion Component Modules"],
+		groupDescriptions: ["Framework Description", "Infusion Component Modules"],
+		groupModules: [
+			["framework", "fss", "fssReset","fssLayout","fssText", "fssThemes", "renderer"],
+			["inlineEdit", "pager", "progress","reorderer","tableOfContents", "uiOptions", "undo", "uploader"]
+		],
+			            
+		moduleValues: ["framework", "inlineEdit"],
+		moduleNames: ["Fluid Infusion Framework", "Inline Edit"],
+		moduleDescriptions: ["The core of the Fluid Infusion framework. Required for all Fluid components", "Allows a user to do quick edits to simple text directly on a web page. "],
+		modulesDependencies: [["jQuery", "jQueryUICore", "jQueryDelegatePlugin"], ["jQuery", "jQueryTooltipPlugin", "framework", "undo"]],
+		moduleSelections: [],
+			            
+		selectionValues: ["minified", "source"],
+		selectionNames: ["Minified", "Source"],
+		selectionChoice: ["minified"]
+	}
+}

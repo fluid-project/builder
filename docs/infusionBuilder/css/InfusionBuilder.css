@@ -1,0 +1,103 @@
+.fl-infusionBuilder {
+}
+.fl-infusionBuilder ol {
+    margin:0;
+    padding:0;
+}
+.fl-infusionBuilder h3 {
+    margin:0;
+    padding:5px;
+    margin-bottom:5px;
+    border-bottom:2px solid #ccc;
+}
+.fl-infusionBuilder button {
+	background:#ccc;
+	border:0;
+}
+.fl-infusionBuilder ol li {
+    list-style-type:none;
+    display:block;
+	zoom:1;
+	margin:0;
+	padding:0;
+}
+.fl-infusionBuilder ol li:hover {
+    background-color:#fd7;
+}/*
+.fl-infusionBuilder ol li:hover .fl-infusionBuilder-description {
+    display:block;
+}*/
+.fl-infusionBuilder ol li:focus .fl-infusionBuilder-description {
+    display:block;
+}
+
+.fl-infusionBuilder ol li input {
+    float:left;
+    margin:5px;
+}
+.fl-infusionBuilder ol li label {
+    cursor:pointer;
+    display:block;
+    margin-left:24px;
+    padding:3px 5px 5px;
+    font-weight:bold;
+}
+
+.fl-infusionBuilder-group {
+	width:33%;
+	float:left;
+}
+.fl-infusionBuilder .fl-infusionBuilder-description {
+    color : #000;
+    font-weight: normal;
+    display:none;
+    padding:0 5px 5px 0;
+}
+.fl-infusionBuilder .fl-col ol li div {
+    font-size:0.85em;
+    font-weight:normal;
+    line-height:normal;
+    margin-left:30px;
+}
+.fl-infusionBuilder .fl-infusionBuilder-selected {
+    background-color: #b3e5ff;
+    color:#000;
+}
+.fl-infusionBuilder .fl-infusionBuilder-selected .fl-infusionBuilder-description {
+    color:#000;
+}
+
+.fl-infusionBuilder-download {
+	display: none;
+	padding: 40px 0;
+}
+
+.fl-infusionBuilder .fl-infusionBuilder-compressionControls {
+    padding:10px;
+}
+
+.fl-infusionBuilder .fl-infusionBuilder-button,
+input[type=submit].fl-infusionBuilder-button.fl-infusionBuilder-downloadbutton {
+    border:none;
+    background-color:transparent;
+    padding:0 0 0 13px;
+}
+.fl-infusionBuilder .fl-infusionBuilder-button {
+	width:93%;
+	background-repeat:no-repeat;
+	background-color:transparent;
+	background-position:left center;
+}
+.fl-infusionBuilder .fl-infusionBuilder-button .fl-button-inner {
+	float:none;
+	display:block;
+}
+.fl-infusionBuilder-downloadOptions {	
+	width:200px;
+	float:right;
+}
+/*******************************************************/
+.fl-theme-mist .fl-infusionBuilder .fl-infusionBuilder-selected {
+    background-color: #cce4ff;
+    color:#000;
+}

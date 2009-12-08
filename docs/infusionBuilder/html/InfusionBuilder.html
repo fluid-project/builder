@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="title" content="Infusion Builder Demo" />
+        <meta name="description" content="Download a custom build of Fluid Infusion containing only the features you want." />
+		<meta name="keywords" content="custom download, Fluid Infusion, javascript" />
+		<title>Infusion Builder Demo</title>
+        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-reset.css" />
+        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-layout.css" />
+        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-text.css" />
+        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-theme-mist.css" />
+        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-theme-coal.css" />
+        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-theme-slate.css" />
+
+        <link type="text/css" rel="stylesheet" href="../css/InfusionBuilder.css" />
+
+        <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+        <script type="text/javascript" src="../js/infusionBuilder.js"></script>
+		<script type="text/javascript" src="../js/infusionBuilder-data.js"></script>
+        
+        <!-- Queries the server for the json data to load into the component and places it into the fluid.components.dependencies variable. To use this variable see note in builderInit call below -->
+        <script type="text/javascript" src="../php/builder.php?var=fluid.infusionBuilder.dependencies"></script> 
+        
+	</head>
+    <body class="fl-theme-mist">
+        <div id="infusionBuilder" class="fl-infusionBuilder">
+            <!-- The checkboxes, buttons, and other controls for the builder -->
+            <div class="flc-infusionBuilder-downloadControls">
+                <h2>Build your own Infusion download</h2>
+                <p>This page allows you to select which modules of the Fluid Infusion
+                software you would like to download. Your selections will be packaged
+                into a custom .zip file for downloading. <strong>Note:</strong> Some
+                of the modules require other modules to function, so any dependent
+                modules will also be automatically selected (even if you uncheck them).
+                If you need exact control over your build, see <a href="">Creating a 
+                Fluid Custom Build</a>.</p>
+                
+                
+                <div class="fl-container-flex75 fl-force-left">
+                    <div class="flc-infusionBuilder-selectionsContainer">
+                        <div class="flc-infusionBuilder-group fl-infusionBuilder-group">
+                            <h3 class="flc-infusionBuilder-groupName">Group Name</h3>
+                            <ol class="flc-infusionBuilder-modules">
+                                <li class="flc-infusionBuilder-module">
+                                    <input id="flc-infusionBuilder-input" type="checkbox">                                    
+                                    <label for="flc-infusionBuilder-input" class="flc-infusionBuilder-inputLabel">
+                                        Module Name
+                                    </label>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="fl-infusionBuilder-downloadOptions">
+                    <h3>Download Options</h3>
+                    <div class="flc-infusionBuilder-compressionControls fl-infusionBuilder-compressionControls">
+                        <span class="flc-infusionBuilder-selectionModifier">
+                            <input id="flc-infusionBuilder-selectionModifierInput" type="radio" />
+                            <label class="flc-infusionBuilder-selectionModifierLabel" for="flc-infusionBuilder-selectionModifierInput">
+                                Minified build
+                            </label>
+                        </span>
+                    </div>
+                    
+                    <button title="Check all Modules" class="flc-infusionBuilder-checkAll fl-button-left fl-infusionBuilder-button">
+                        <span class="fl-button-inner"> Select All </span>
+                    </button>
+                    <button title="Uncheck all Modules" class="flc-infusionBuilder-unCheckAll fl-button-left fl-infusionBuilder-button">
+                        <span class="fl-button-inner"> Reset Selection </span>
+                    </button>
+                    
+                    <form name="form" method="post" action="../php/builder.php">
+                        <input id="moduleSelections" name="moduleSelections" type="hidden" value=""/>
+                        <input id="typeSelections" name="typeSelections" type="hidden" value=""/>
+                        <button type="submit" name="Download" value="Download" class="flc-infusionBuilder-downloadButton fl-button-left fl-infusionBuilder-button fl-infusionBuilder-downloadbutton" disabled="disabled" >
+                            <span class="fl-button-inner">Download</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="flc-infusionBuilder-moduleSelections fl-offScreen-hidden">Modules Selected: none</div>
+            </div>
+                 
+            <!-- The message shown to users after they start the download. -->
+            <div class="flc-infusionBuilder-downloadMsg fl-infusionBuilder-download" >
+                <h2>Download Fluid Infusion</h2>
+                <h3>Preparing your download...<img src="../images/spinner.gif" class="downloadSpinner" /></h3>
+            
+                <p>Thank you for your interest in the Infusion Framework.</p>
+                <p>You might find the following links useful with your shiny new power-tools:</p>
+                <ol>
+                    <li><a href="">Report bugs</a></li>
+                    <li><a href="">Documentation and API</a></li>
+                    <li><a href="">Component status pages</a></li>
+                </ol>
+    
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            fluid.infusionBuilder("#infusionBuilder", fluid.infusionBuilder.dependencies);
+        </script>
+    </body>
+</html>
