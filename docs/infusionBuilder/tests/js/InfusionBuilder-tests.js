@@ -171,14 +171,12 @@
         //set defaults for no groups case
         var numGroups = 1;
         var groupNamesArray = [""];
-        var groupDescriptionArray = [""];
         var groupModulesArray = [""];
         
         //if groups exist set values for group info
         if (data.model.groupInfo.length > 0) {
             numGroups = data.model.groupInfo.length;
             groupNamesArray = utilityFunctions.extractArray(data.model.groupInfo, "groupName");
-            groupDescriptionArray = utilityFunctions.extractArray(data.model.groupInfo, "groupDescription");
             
             //get group modules listing to compare with module listing
             var modulesArray = utilityFunctions.extractArray(data.model.groupInfo, "groupModules");
@@ -249,18 +247,14 @@
          * Checks the rendering of groups
          */
         var groupNameClass = ".flc-infusionBuilder-groupName";
-        var groupDescriptionClass = ".flc-infusionBuilder-groupDescription";
         var renderedGroupsTester = {
-            numGroupTests: 3 + numGroups,
+            numGroupTests: 2 + numGroups,
             checkRenderedGroups: function () {
             
                 //check that correct number of groups are rendered
                 var numRenderedGroups = $(".flc-infusionBuilder-group").length;
                 jqUnit.assertEquals("Number of groups", numGroups, numRenderedGroups);
-                                
-                //no descriptions are rendered at this time
-                jqUnit.assertEquals("Description text", "", $(groupDescriptionClass).text());
-                
+                                               
                 //check that correct number of group name fields are rendered
                 var renderedGroupNamesArray = $(groupNameClass);
                 var numRenderedGroupNames = renderedGroupNamesArray.length;
@@ -296,35 +290,29 @@
          * Checks the rendering of the modules
          */
         var moduleNameClass = ".flc-infusionBuilder-inputLabel";
-        var moduleDescriptionClass = ".flc-infusionBuilder-moduleDescription";
         var moduleCheckboxClass = ".flc-infusionBuilder-module input:checkbox";
         var moduleCheckboxCheckedClass = moduleCheckboxClass + ":checked";
         var renderedModulesTester = {
-            numModuleTests: 5 + 3 * numModules,
+            numModuleTests: 4 + 2 * numModules,
             checkRenderedModules: function () {
                 //check that correct numbers of module elements are rendered
                 var renderedCheckboxArray = $(moduleCheckboxClass);
                 var renderedModuleNameArray = $(moduleNameClass);
-                var renderedModuleDescriptionArray = $(moduleDescriptionClass);
                 
                 var numRenderedCheckboxes = renderedCheckboxArray.length;
                 var numRenderedModules = $(".flc-infusionBuilder-module").length;
                 var numRenderedModuleNames = renderedModuleNameArray.length;
-                var numRenderedModuleDescriptions = renderedModuleDescriptionArray.length;
                 
                 jqUnit.assertEquals("Number of checkboxes", numModules, numRenderedCheckboxes);
                 jqUnit.assertEquals("Number of modules", numModules, numRenderedModules);
                 jqUnit.assertEquals("Number of module name fields", numModules, numRenderedModuleNames);
-                jqUnit.assertEquals("Number of module description fields", numModules, numRenderedModuleDescriptions);
                 
                 for (var numMod = 0; numMod < numModules; numMod++) {
                     var renderedCheckboxText = $(renderedCheckboxArray[numMod]).val();
                     var renderedModuleNameText = $(renderedModuleNameArray[numMod]).text();
-                    var renderedModuleDescriptionText = $(renderedModuleDescriptionArray[numMod]).text();
                     
                     jqUnit.assertEquals("Rendered module checkbox  - " + renderedCheckboxText, moduleValuesArray[numMod], renderedCheckboxText);
                     jqUnit.assertEquals("Rendered module name - " + renderedModuleNameText, moduleNamesArray[numMod] + " " + moduleDescriptionArray[numMod], renderedModuleNameText);
-                    jqUnit.assertEquals("Rendered module description - " + renderedModuleDescriptionText, moduleDescriptionArray[numMod], renderedModuleDescriptionText);
                 }
                 
                 //check that no modules are rendered as selected
