@@ -86,7 +86,6 @@
             {selector: that.options.selectors.module, id: "module:"},
             {selector: that.options.selectors.moduleInput, id: "moduleInput"},
             {selector: that.options.selectors.moduleInputLabel, id: "moduleLabel"},
-            {selector: that.options.selectors.moduleDescription, id: "moduleDescription"}
         ];
         
         /**
@@ -611,7 +610,6 @@
             module: ".flc-infusionBuilder-module",
             moduleInput: "#flc-infusionBuilder-input",
             moduleInputLabel: ".flc-infusionBuilder-inputLabel",
-            moduleDescription: ".flc-infusionBuilder-moduleDescription",
             
             compressionControls: ".flc-infusionBuilder-compressionControls",
             selectionModifier: ".flc-infusionBuilder-selectionModifier",
