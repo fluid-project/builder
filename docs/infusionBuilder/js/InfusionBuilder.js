@@ -83,7 +83,6 @@
         var selectionsRenderMap = [
             {selector: that.options.selectors.groups, id: "groups:"},
             {selector: that.options.selectors.groupName, id: "groupName"},
-            {selector: that.options.selectors.groupDescription, id: "groupDescription"},
             {selector: that.options.selectors.module, id: "module:"},
             {selector: that.options.selectors.moduleInput, id: "moduleInput"},
             {selector: that.options.selectors.moduleInputLabel, id: "moduleLabel"},
@@ -119,7 +118,7 @@
             tree.children = tree.children.concat(fluid.transform(groupInfo, function (group) {
                 var tempTree = {
                     ID: "groups:",
-                    children: [treeLeafValue("groupName", group.groupName || ""), treeLeafValue("groupDescription", group.groupDescriptions || "")]
+                    children: [treeLeafValue("groupName", group.groupName || "")]
                 };
                 var modules = moduleSubstitution || group.groupModules;
                 
@@ -607,7 +606,6 @@
             
             groups: ".flc-infusionBuilder-group",
             groupName: ".flc-infusionBuilder-groupName",
-            groupDescription: ".flc-infusionBuilder-groupDescription",
             
             modules: ".flc-infusionBuilder-modules",
             module: ".flc-infusionBuilder-module",
@@ -645,7 +643,6 @@
             groupInfo: [
                 {
                     groupName: "",
-                    groupDescription: "",
                     groupModules: []
                 }
             ],
