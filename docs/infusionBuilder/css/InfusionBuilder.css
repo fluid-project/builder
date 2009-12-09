@@ -18,7 +18,7 @@
     list-style-type:none;
     display:block;
 	zoom:1;
-	margin:0;
+	margin:1px 0 0;
 	padding:0;
 }
 .fl-infusionBuilder ol li:hover {
