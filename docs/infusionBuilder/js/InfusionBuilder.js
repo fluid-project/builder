@@ -98,7 +98,7 @@
          * @param (Object) position, the position of the module name and description in the array
          */
         var concatModuleNameDescription = function (that, position) {
-            return moduleNames[position] + " <span class=\"flc-infusionBuilder-moduleDescription fl-offScreen-hidden\">" + that.options.model.moduleInfo[position].moduleDescription + "</span>";
+            return moduleNames[position] + " <span class='" + that.options.styles.hideModuleDescription + "'>" + that.options.model.moduleInfo[position].moduleDescription + "</span>";
         };
         
         /**
@@ -631,7 +631,8 @@
         strings: {},
         
         styles: {
-            selectedModule: "fl-infusionBuilder-selected"
+            selectedModule: "fl-infusionBuilder-selected",
+            hideModuleDescription: "fl-offScreen-hidden"
         },
         
         events: {
