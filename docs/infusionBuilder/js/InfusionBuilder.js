@@ -85,7 +85,7 @@
             {selector: that.options.selectors.groupName, id: "groupName"},
             {selector: that.options.selectors.module, id: "module:"},
             {selector: that.options.selectors.moduleInput, id: "moduleInput"},
-            {selector: that.options.selectors.moduleInputLabel, id: "moduleLabel"},
+            {selector: that.options.selectors.moduleInputLabel, id: "moduleLabel"}
         ];
         
         /**
