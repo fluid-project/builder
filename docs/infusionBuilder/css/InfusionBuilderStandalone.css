@@ -1,0 +1,71 @@
+html {
+    background-color:#333;
+    color:#fff;
+}
+body {
+	padding:10px;
+    background:url("../images/bodyBg.png") repeat-x top left;
+}
+
+h1, h2 {margin:0; padding:10px 0;}
+h1 {font:normal 2em Arial, Helvetica, sans-serif}
+h2 {font:normal 1.5em Arial, Helvetica, sans-serif;}
+h3 {}
+
+
+a {
+    color:#00aeef; 
+    text-decoration:none;
+}
+
+h1 {
+    margin:-10px;
+    padding:30px 0 40px 10px;
+    background:url("../images/logoCorner.png") no-repeat top right;
+}
+.siteLink {
+    font-size: 0.5em;
+    position: absolute;
+    right: 55px;
+    top: 55px;
+}
+.fl-infusionBuilder h3 {
+    border-bottom:1px solid #555;
+}
+.fl-infusionBuilder ol li label {
+    font-weight:normal;
+    color:#999;
+}
+.fl-infusionBuilder ol li:hover label {
+    color:#333;
+    font-weight:bold;
+}
+.fl-infusionBuilder ol li.fl-infusionBuilder-selected,
+.fl-infusionBuilder .fl-infusionBuilder-selected label  {
+    background-color: #00aeef;
+    color:#333;
+    font-weight:bold;
+}
+.fl-infusionBuilder-group {
+    padding-top:10px;
+    width:22%;
+}
+
+.fl-infusionBuilder-downloadOptions {
+    padding:10px;
+    background:#000;
+    -webkit-border-radius:10px;    
+    -moz-border-radius:10px;
+}
+
+.fl-infusionBuilder .fl-button-left {
+    margin:5px 0;
+    width:200px;
+}
+
+.fl-infusionBuilder .fl-button-left {
+    background-image:url("../images/buttons-cap.png");
+}
+.fl-infusionBuilder .fl-button-inner {
+    background-image:url("../images/buttons-stretch.png");
+}

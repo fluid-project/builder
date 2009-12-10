@@ -9,11 +9,9 @@
         <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-reset.css" />
         <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-layout.css" />
         <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-text.css" />
-        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-theme-mist.css" />
-        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-theme-coal.css" />
-        <link type="text/css" rel="stylesheet" href="../infusion/src/webapp/framework/fss/css/fss-theme-slate.css" />
-
+        
         <link type="text/css" rel="stylesheet" href="../css/InfusionBuilder.css" />
+        <link type="text/css" rel="stylesheet" href="../css/InfusionBuilderStandalone.css" />
 
         <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
         <script type="text/javascript" src="../infusion/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
@@ -30,11 +28,18 @@
         <script type="text/javascript" src="../php/builder.php?var=fluid.infusionBuilder.dependencies"></script> 
         
 	</head>
-    <body class="fl-theme-mist">
+    <body>
         <div id="infusionBuilder" class="fl-infusionBuilder">
             <!-- The checkboxes, buttons, and other controls for the builder -->
             <div class="flc-infusionBuilder-downloadControls">
-                <h2>Build your own Infusion download</h2>
+                <h1>
+                    <a href="http://infusion-builder.fluidproject.org">Fluid Infusion Builder</a>
+                    <a class="siteLink" href="http://www.fluidproject.org">www.fluidproject.org</a>
+                </h1>
+                
+                <h2>Build a custom Fluid Infusion package</h2>
+                
+                
                 <p>This page allows you to select which modules of the Fluid Infusion
                 software you would like to download. Your selections will be packaged
                 into a custom .zip file for downloading. <strong>Note:</strong> Some
@@ -44,21 +49,21 @@
                 Fluid Custom Build</a>.</p>
                 
                 
-                <div class="fl-container-flex75 fl-force-left">
-                    <div class="flc-infusionBuilder-selectionsContainer">
-                        <div class="flc-infusionBuilder-group fl-infusionBuilder-group">
-                            <h3 class="flc-infusionBuilder-groupName">Group Name</h3>
-                            <ol class="flc-infusionBuilder-modules">
-                                <li class="flc-infusionBuilder-module">
-                                    <input id="flc-infusionBuilder-input" type="checkbox">                                    
-                                    <label for="flc-infusionBuilder-input" class="flc-infusionBuilder-inputLabel">
-                                        Module Name
-                                    </label>
-                                </li>
-                            </ol>
-                        </div>
+                
+                <div class="flc-infusionBuilder-selectionsContainer">
+                    <div class="flc-infusionBuilder-group fl-infusionBuilder-group">
+                        <h3 class="flc-infusionBuilder-groupName">Group Name</h3>
+                        <ol class="flc-infusionBuilder-modules">
+                            <li class="flc-infusionBuilder-module">
+                                <input id="flc-infusionBuilder-input" type="checkbox">                                    
+                                <label for="flc-infusionBuilder-input" class="flc-infusionBuilder-inputLabel">
+                                    Module Name
+                                </label>
+                            </li>
+                        </ol>
                     </div>
                 </div>
+            
                 <div class="fl-infusionBuilder-downloadOptions">
                     <h3>Download Options</h3>
                     <div class="flc-infusionBuilder-compressionControls fl-infusionBuilder-compressionControls">
