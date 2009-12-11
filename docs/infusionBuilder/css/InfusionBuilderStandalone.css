@@ -34,11 +34,14 @@ h1 {
 }
 .fl-infusionBuilder ol li label {
     font-weight:normal;
-    color:#999;
+    color:#ccc;
 }
 .fl-infusionBuilder ol li:hover label {
-    color:#333;
+    color:#000;
     font-weight:bold;
+}
+.fl-infusionBuilder ol li:hover .fl-infusionBuilder-description {
+    color:#000;
 }
 .fl-infusionBuilder ol li.fl-infusionBuilder-selected,
 .fl-infusionBuilder .fl-infusionBuilder-selected label  {
