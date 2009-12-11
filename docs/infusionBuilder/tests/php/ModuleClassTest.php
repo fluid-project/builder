@@ -11,8 +11,8 @@
 /**
  * Tests non-trivial module class functions.
  */
-require_once ('C:\Program Files\php\simpletest\autorun.php');
-require_once ('..\..\php\ModuleClass.php');
+require_once ('simpletest/autorun.php');
+require_once ('../../../../infusionBuilder-secure/php/ModuleClass.php');
 
 class TestModuleClass extends UnitTestCase
 {

@@ -11,8 +11,8 @@
 /**
  * Tests non-trivial group class functions.
  */
-require_once ('C:\Program Files\php\simpletest\autorun.php');
-require_once ('..\..\php\GroupClass.php');
+require_once ('simpletest/autorun.php');
+require_once ('../../../../infusionBuilder-secure/php/GroupClass.php');
 
 class TestGroupClass extends UnitTestCase
 {

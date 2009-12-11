@@ -11,8 +11,8 @@
 /**
  * Tests utility functions for the infusion builder.
  */
-require_once ('C:\Program Files\php\simpletest\autorun.php');
-require_once ('..\..\php\BuilderUtilities.php');
+require_once ('simpletest/autorun.php');
+require_once ('../../../../infusionBuilder-secure/php/BuilderUtilities.php');
 
 
 class TestBuilderUtilities extends UnitTestCase
