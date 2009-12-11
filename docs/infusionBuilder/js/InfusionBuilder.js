@@ -85,7 +85,8 @@
             {selector: that.options.selectors.groupName, id: "groupName"},
             {selector: that.options.selectors.module, id: "module:"},
             {selector: that.options.selectors.moduleInput, id: "moduleInput"},
-            {selector: that.options.selectors.moduleInputLabel, id: "moduleLabel"}
+            {selector: that.options.selectors.moduleInputLabel, id: "moduleLabel"},
+            {selector: that.options.selectors.moduleDescription, id: "moduleDescription"}
         ];
         
         /**
@@ -95,10 +96,10 @@
          * 
          * @param (Object) that, the component
          * @param (Object) position, the position of the module name and description in the array
-         */
-        var concatModuleNameDescription = function (that, position) {
+         */         
+        /*var concatModuleNameDescription = function (that, position) {
             return moduleNames[position] + " <span class='" + that.options.styles.hideModuleDescription + "'>" + that.options.model.moduleInfo[position].moduleDescription + "</span>";
-        };
+        };*/
         
         /**
          * Programmatically generates a hydrated component tree
@@ -132,13 +133,16 @@
                                     type: "identify", 
                                     key: "check-" + position 
                                 }]
-                            }, { ID: "moduleLabel", choiceindex: position, parentRelativeID: "..::..::selections",
+                            }, /*{ ID: "moduleLabel", choiceindex: position, parentRelativeID: "..::..::selections",
                              markup: concatModuleNameDescription(that, position),
                              decorators: [{
                                     type: "attrs",
                                     attributes: {title: that.options.model.moduleInfo[position].moduleDescription || ""}
                                 }]
-                          } ]
+                          }*/
+                            {ID: "moduleLabel", choiceindex: position, parentRelativeID: "..::..::selections"},
+                            treeLeafValue("moduleDescription", that.options.model.moduleInfo[position].moduleDescription || "")
+                          ]
                         };
                 }));
                 
@@ -610,6 +614,7 @@
             module: ".flc-infusionBuilder-module",
             moduleInput: "#flc-infusionBuilder-input",
             moduleInputLabel: ".flc-infusionBuilder-inputLabel",
+            moduleDescription: ".flc-infusionBuilder-moduleDescription",
             
             compressionControls: ".flc-infusionBuilder-compressionControls",
             selectionModifier: ".flc-infusionBuilder-selectionModifier",
