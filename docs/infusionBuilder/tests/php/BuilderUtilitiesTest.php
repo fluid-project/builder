@@ -85,7 +85,7 @@ class TestBuilderUtilities extends UnitTestCase
                     $this->assertEqual("", $actualGroupIdObject->getDescription());
                 }
             }
-            if (!found) fail();
+            if (!$found) fail();
         }
     }
 

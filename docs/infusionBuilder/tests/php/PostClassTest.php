@@ -116,16 +116,6 @@ class TestPostClass extends UnitTestCase
         $expectedKey = "0_17_18_20_".$this->postVariables->getFluidVersionNumber();
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
-    }
-    
-    /* 
-     * note that this test will fail unless someone manually updates the expected value
-     * when the fluid version number changes.
-     */
-    function testGetFluidVersionNumber() {
-    	$expected = "1.1.2";
-    	$this->assertEqual($this->postVariables->getFluidVersionNumber(), $expected);
-    }
-	
+    }	
 }
 ?>
