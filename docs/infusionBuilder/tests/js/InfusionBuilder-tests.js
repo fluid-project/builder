@@ -290,29 +290,35 @@
          * Checks the rendering of the modules
          */
         var moduleNameClass = ".flc-infusionBuilder-inputLabel";
+        var moduleDescriptionClass = ".flc-infusionBuilder-moduleDescription";
         var moduleCheckboxClass = ".flc-infusionBuilder-module input:checkbox";
         var moduleCheckboxCheckedClass = moduleCheckboxClass + ":checked";
         var renderedModulesTester = {
-            numModuleTests: 4 + 2 * numModules,
+            numModuleTests: 5 + 3 * numModules,
             checkRenderedModules: function () {
                 //check that correct numbers of module elements are rendered
                 var renderedCheckboxArray = $(moduleCheckboxClass);
                 var renderedModuleNameArray = $(moduleNameClass);
+                var renderedModuleDescriptionArray = $(moduleDescriptionClass);
                 
                 var numRenderedCheckboxes = renderedCheckboxArray.length;
                 var numRenderedModules = $(".flc-infusionBuilder-module").length;
                 var numRenderedModuleNames = renderedModuleNameArray.length;
+                var numRenderedModuleDescriptions = renderedModuleDescriptionArray.length;
                 
                 jqUnit.assertEquals("Number of checkboxes", numModules, numRenderedCheckboxes);
                 jqUnit.assertEquals("Number of modules", numModules, numRenderedModules);
                 jqUnit.assertEquals("Number of module name fields", numModules, numRenderedModuleNames);
+                jqUnit.assertEquals("Number of module description fields", numModules, numRenderedModuleDescriptions);
                 
                 for (var numMod = 0; numMod < numModules; numMod++) {
                     var renderedCheckboxText = $(renderedCheckboxArray[numMod]).val();
                     var renderedModuleNameText = $(renderedModuleNameArray[numMod]).text();
+                    var renderedModuleDescriptionText = $(renderedModuleDescriptionArray[numMod]).text();
                     
                     jqUnit.assertEquals("Rendered module checkbox  - " + renderedCheckboxText, moduleValuesArray[numMod], renderedCheckboxText);
-                    jqUnit.assertEquals("Rendered module name - " + renderedModuleNameText, moduleNamesArray[numMod] + " " + moduleDescriptionArray[numMod], renderedModuleNameText);
+                    jqUnit.assertEquals("Rendered module name - " + renderedModuleNameText, moduleNamesArray[numMod], renderedModuleNameText);
+                    jqUnit.assertEquals("Rendered module description - " + renderedModuleDescriptionText, moduleDescriptionArray[numMod], renderedModuleDescriptionText);
                 }
                 
                 //check that no modules are rendered as selected
