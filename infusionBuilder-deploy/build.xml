@@ -81,7 +81,7 @@
 	</target>
     
  	<target name="deploy" description="Deploy the production version of the Infusion Builder"
-		depends="deployDaily, cleanup">
+		depends="daily, cleanup">
 	</target>
     
     <target name="daily" description="Deploy the Infusion Builder on the daily build site"
