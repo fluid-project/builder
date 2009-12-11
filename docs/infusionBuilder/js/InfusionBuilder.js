@@ -88,19 +88,7 @@
             {selector: that.options.selectors.moduleInputLabel, id: "moduleLabel"},
             {selector: that.options.selectors.moduleDescription, id: "moduleDescription"}
         ];
-        
-        /**
-         * Concatinates the module name and a hidden span containing the module description.
-         * The hidden span is only read by screen readers and supplements the description that is 
-         * also displayed as a title for the checkbox label.
-         * 
-         * @param (Object) that, the component
-         * @param (Object) position, the position of the module name and description in the array
-         */         
-        /*var concatModuleNameDescription = function (that, position) {
-            return moduleNames[position] + " <span class='" + that.options.styles.hideModuleDescription + "'>" + that.options.model.moduleInfo[position].moduleDescription + "</span>";
-        };*/
-        
+
         /**
          * Programmatically generates a hydrated component tree
          * 
@@ -133,13 +121,7 @@
                                     type: "identify", 
                                     key: "check-" + position 
                                 }]
-                            }, /*{ ID: "moduleLabel", choiceindex: position, parentRelativeID: "..::..::selections",
-                             markup: concatModuleNameDescription(that, position),
-                             decorators: [{
-                                    type: "attrs",
-                                    attributes: {title: that.options.model.moduleInfo[position].moduleDescription || ""}
-                                }]
-                          }*/
+                            },
                             {ID: "moduleLabel", choiceindex: position, parentRelativeID: "..::..::selections"},
                             treeLeafValue("moduleDescription", that.options.model.moduleInfo[position].moduleDescription || "")
                           ]
