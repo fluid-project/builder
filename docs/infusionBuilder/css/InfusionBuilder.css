@@ -63,9 +63,11 @@
 
 .fl-infusionBuilder-download {
 	display: none;
-	padding: 40px 0;
 }
-
+.fl-infusionBuilder-download h2 {
+    background:url(../images/spinner.gif) no-repeat center left;
+    padding-left:45px;
+}
 .fl-infusionBuilder .fl-infusionBuilder-compressionControls {
     padding:10px;
 }
