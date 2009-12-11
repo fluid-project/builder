@@ -117,5 +117,14 @@ class TestPostClass extends UnitTestCase
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
     }	
+    
+    function testValidateIncludes6()
+    {
+        $test = "framework";
+        $expectedIncludes = "framework";
+        $expectedKey = "0_".$this->postVariables->getFluidVersionNumber();
+        $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
+        $this->assertEqual($this->postVariables->getKey(), $expectedKey);
+    }
 }
 ?>

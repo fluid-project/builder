@@ -68,8 +68,8 @@ class PostClass
     	//create module index code
         sort($this->module_keys);
     	$moduleIndexes = implode($this->module_keys, '_');
-		if (empty($moduleIndexes)) return "";
-				
+        if ($moduleIndexes == "") return "";
+        
         $this->key = $moduleIndexes."_".$this->getFluidVersionNumber();
     }
 	
