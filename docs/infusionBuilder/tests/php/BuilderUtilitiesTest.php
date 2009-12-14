@@ -11,7 +11,8 @@
 /**
  * Tests utility functions for the infusion builder.
  */
-require_once ('simpletest/autorun.php');
+include_once ("../../../../infusionBuilder-secure/php/config.php");
+require_once (SIMPLETEST_PATH.'simpletest/autorun.php');
 require_once ('../../../../infusionBuilder-secure/php/BuilderUtilities.php');
 
 

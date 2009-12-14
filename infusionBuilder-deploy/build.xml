@@ -69,6 +69,7 @@
 		<replace file="${config_file}">
 			<replacefilter token="${secure_replace_token}" value="${secure_deploy}" />
 			<replacefilter token="${build_replace_token}" value="${build_deploy}" />
+            <replacefilter token="${simpletest_replace_token}" value="${deploy}" />
 			<replacefilter token="${mysql_username_replace_token}"
 				value="${mysql_user}" />
 			<replacefilter token="${mysql_password_replace_token}"

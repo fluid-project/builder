@@ -21,6 +21,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
     //***Remember to end path names with a forward slash
     define ("SECURE_PATH", "/path/to/infusionBuilder-secure/");
     define ("BUILDER_PATH", "/path/to/infusionBuilder/");
+    define ("SIMPLETEST_PATH", "/path/to/simpleTest/");
     define("DB_USER", "mysql_user");
     define("DB_PASS", "mysql_password");
     
