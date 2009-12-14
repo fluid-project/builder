@@ -12,7 +12,7 @@
  * Tests non-trivial module class functions.
  */
 include_once ("../../../../infusionBuilder-secure/php/config.php");
-require_once (SIMPLETEST_PATH.'simpletest/autorun.php');
+require_once (SIMPLETEST_PATH.'/simpletest/autorun.php');
 require_once ('../../../../infusionBuilder-secure/php/ModuleClass.php');
 
 class TestModuleClass extends UnitTestCase
