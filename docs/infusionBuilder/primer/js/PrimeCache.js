@@ -17,15 +17,19 @@
 
 	var primer = function(that) {
 
-		$.ajax( {
-			type : "POST",
-			url : "../../php/builder.php",
-			data : {
-				moduleSelections : that.model.moduleSelections[0],
-				typeSelections : "minified"
-			},
-			timeout: 120000
-		});
+		var moduleSelections = that.model.moduleSelections;
+		for ( var i in moduleSelections) {
+			$.ajax( {
+				type : that.options.ajaxOptions.type,
+				url : that.options.ajaxOptions.url,
+				timeout : that.options.ajaxOptions.timeout,
+				async : that.options.ajaxOptions.async,
+				data : {
+					moduleSelections : that.model.moduleSelections[i],
+					typeSelections : that.model.typeSelections
+				}
+			});
+		}
 	}
 
 	/**
@@ -65,7 +69,8 @@
 		var that = fluid.initView("fluid.primeCache", container, options);
 
 		that.model = {
-			moduleSelections : [ "framework", "fss", "renderer" ]
+			typeSelections: "minified",
+			moduleSelections : [ "framework", "fss"]
 		};
 
 		setup(that);
@@ -80,6 +85,12 @@
 
 		selectors : {
 			initiatePriming : ".flc-primeCache-button"
+		},
+		ajaxOptions : {
+			type : "POST",
+			url : "../../php/builder.php",
+			timeout : 120000,
+			async: false
 		}
 	});
 
