@@ -121,13 +121,11 @@
                                     type: "identify", 
                                     key: "check-" + position 
                                 }]
-                            },
-                            {ID: "moduleLabel", choiceindex: position, parentRelativeID: "..::..::selections"},
-                            treeLeafValue("moduleDescription", that.options.model.moduleInfo[position].moduleDescription || "")
-                          ]
+                            }, {ID: "moduleLabel", choiceindex: position, parentRelativeID: "..::..::selections"},
+                                treeLeafValue("moduleDescription", that.options.model.moduleInfo[position].moduleDescription || "")
+                            ]
                         };
                 }));
-                
                 return tempTree;
             }));
             
