@@ -14,7 +14,7 @@
     </target>
     
 	<target name="backup"
-		description="Backs up the infusion builder directories and database"
+		description="Backs up the infusion builder directories"
 		depends="timestamp">
 		<mkdir dir="${backup}/${MY_TODAY}" />
 		<move file="${secure_deploy}" todir="${backup}/${MY_TODAY}"
@@ -22,6 +22,13 @@
 		<move file="${build_deploy}" todir="${backup}/${MY_TODAY}"
 			failonerror="false" />
 	</target>
+    
+    <target name="delete_old"
+        description="Removes the infusion builder directories">
+        <delete dir="${secure_deploy}" failonerror="false" />
+        <delete dir="${build_deploy}" failonerror="false" />
+    </target>
+
 
 	<target name="timestamp" description="sets the time stamp properties">
 		<tstamp>
@@ -30,7 +37,7 @@
 	</target>
 
 	<target name="database_backup"
-		description="Backs up the mysql database and clears the database tables"
+		description="Backs up the mysql database"
 		depends="timestamp">
 		<exec executable="mysqldump"
 			output="${backup}/${MY_TODAY}/${mysql_database_name}.sql">
@@ -82,11 +89,11 @@
 	</target>
     
  	<target name="deploy" description="Deploy the production version of the Infusion Builder"
-		depends="daily, cleanup">
+		depends="setup_server_props, backup, database_backup, database_setup, setup, make_dirs, config, cleanup">
 	</target>
     
     <target name="daily" description="Deploy the Infusion Builder on the daily build site"
-        depends="setup_server_props, backup, database_backup, database_setup, setup, make_dirs, config">
+        depends="setup_server_props, delete_old, database_setup, setup, make_dirs, config">
     </target>
 
 	<target name="local_deploy" description="Deploy the Infusion Builder on your local machine"
