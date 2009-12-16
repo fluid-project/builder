@@ -64,7 +64,7 @@
 	display: none;
 }
 .fl-infusionBuilder-download h2 {
-    background:url(../images/spinner.gif) no-repeat left center;
+    background: transparent url(../images/spinner.gif) no-repeat left center;
     padding-left:45px;
 }
 .fl-infusionBuilder .fl-infusionBuilder-compressionControls {
