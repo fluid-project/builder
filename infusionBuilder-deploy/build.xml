@@ -93,11 +93,11 @@
 	</target>
     
  	<target name="deploy" description="Deploy the production version of the Infusion Builder"
-		depends="setup_server_props, backup, database_backup, database_setup, setup, make_dirs, config, cleanup">
+		depends="setup_server_props, backup, database_backup, database_setup, setup, minify, make_dirs, config, cleanup">
 	</target>
     
     <target name="daily" description="Deploy the Infusion Builder on the daily build site"
-        depends="setup_server_props, delete_old, database_setup, setup, make_dirs, config">
+        depends="setup_server_props, delete_old, database_setup, setup, minify, make_dirs, config">
     </target>
 
 	<target name="local_deploy" description="Deploy the Infusion Builder on your local machine"
