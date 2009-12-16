@@ -7,7 +7,7 @@ echo -n "and the database password: "
 read password
 
 # Export the Builder from SVN
-svn export https://source.fluidproject.org/svn/incubator/infusionBuilder/trunk/ infusionBuilder
+svn export https://source.fluidproject.org/svn/fluid/infrastructure/infusionBuilder/trunk/ infusionBuilder
 cd infusionBuilder/infusionBuilder-deploy
 
 # Run the Ant deploy script to ensure the correct directory structure and caching is in place
