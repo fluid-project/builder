@@ -65,6 +65,10 @@
 		<move file="../${build_directory}" todir="${deploy}" />
 		<move file="../${secure_directory}" todir="${deploy}" />
 	</target>
+    
+    <target name="minify" description="Minifies infusion for future builds">
+        <ant dir="${build_deploy}/infusion/build-scripts" target="pretreatMinify" inheritAll="false"/>
+    </target>
 
 	<target name="make_dirs">
 		<mkdir dir="${secure_tmp}" />
@@ -97,7 +101,7 @@
     </target>
 
 	<target name="local_deploy" description="Deploy the Infusion Builder on your local machine"
-		depends="setup_local, database_setup, make_dirs, config">
+		depends="setup_local, database_setup, minify, make_dirs, config">
 	</target>
 
 </project>
