@@ -28,6 +28,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
     
     
     // Do not change these unless you know what you are doing
+    define("PRETREATED_PATH", BUILDER_PATH."infusion/build/pretreated/");
     define("BUILD_SCRIPT_PATH", BUILDER_PATH."infusion/build-scripts/");
     define("BUILD_PROPS", BUILD_SCRIPT_PATH."build.properties");
     define("BUILD_FILES", BUILDER_PATH."infusion/src/webapp/");
