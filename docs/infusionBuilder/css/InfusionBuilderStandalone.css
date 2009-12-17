@@ -23,6 +23,7 @@ h1 {
     padding:30px 0 40px 10px;
     background:url("../images/logoCorner.png") no-repeat top right;
 }
+
 .siteLink {
     font-size: 0.5em;
     position: absolute;
@@ -49,11 +50,14 @@ h1 {
 .fl-infusionBuilder ol li:hover .fl-infusionBuilder-description {
     color:#000;
 }
-.fl-infusionBuilder ol li.fl-infusionBuilder-selected/*,
-.fl-infusionBuilder .fl-infusionBuilder-selected label*/  {
-    /*background-color: #00aeef;
-    color:#333;
-    font-weight:bold;*/
+.fl-infusionBuilder :focus {
+    outline:2px solid #fd7;
+}
+.fl-infusionBuilder :focus ~ label {
+    color:#fd7;
+}
+
+.fl-infusionBuilder ol li.fl-infusionBuilder-selected {
     border-left: 10px solid #00aeef; 
     margin-left: 0;
 }
