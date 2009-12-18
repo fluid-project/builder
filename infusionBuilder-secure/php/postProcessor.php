@@ -75,13 +75,13 @@ function buildAntCommand($incl, $excl, $unique_dir)
  * @param object $excludeString Comma separated module names representing the fluid modules to exclude
  */
 
-function executeBuildScript($includeString, $excludeString, $uuid, $minified)
+function executeBuildScript($includeString, $excludeString, $uuid, $doSource)
 {
 	$antCommand = buildAntCommand($includeString, $excludeString, $uuid);
-	if (!$minified) {
+	if ($doSource) {
 	    $antCommand .= " -DnoMinify=\"true\"";
 	}
-    exec($antCommand, $output, $status);
+    exec($antCommand, $output, $status);    
     if (in_array("BUILD SUCCESSFUL", $output))
     {
         return true;
@@ -96,10 +96,10 @@ function executeBuildScript($includeString, $excludeString, $uuid, $minified)
  * @param object $min A boolean indicating that the user wants to download the
  * minified package (true) or src package (false)
  */
-function deliverBuildFile($key, $filepath, $filename)
+function deliverBuildFile($key, $filepath, $filename, $intMin)
 {
     //increment cache download counter
-    $query = "UPDATE cache SET counter = counter + 1 WHERE id='".$key."'";
+    $query = "UPDATE cache SET counter = counter + 1 WHERE id='{$key}' AND minified=".$intMin;
     $result = mysql_query($query);
     if (!$result) return false;
 	
@@ -123,6 +123,13 @@ function deliverBuildFile($key, $filepath, $filename)
 //process posted values
 $postVariables = new PostClass();
 $successPost = processPostVariables($postVariables);
+$cacheKey = $postVariables->getKey();
+$ver = $postVariables->getFluidVersionNumber();
+$min = $postVariables->getMinified();
+$intMin = $min ? 1 : 0;
+$includes = $postVariables->getIncludes();
+$excludes = $postVariables->getExcludes();
+
 if (!$successPost)
 {
     returnError("Cannot process input variables");
@@ -155,19 +162,19 @@ if (mysql_num_rows($uuid_result) == 1) {
 $uuid = $uuid_row["uuid()"];
 
 //initialize some variables
-$cacheKey = $postVariables->getKey();
-$cachepath = CACHE_FILE_PATH.$cacheKey;
-$tmppath = OUTPUT_FILE_PATH_PRODUCTS.$uuid;
-$ver = $postVariables->getFluidVersionNumber();
-$minfilename = "infusion-".$ver.".zip";
-$srcfilename = "infusion-".$ver."-src.zip";
-$min = $postVariables->getMinified();
-$includes = $postVariables->getIncludes();
-$excludes = $postVariables->getExcludes();
+$tmppath = OUTPUT_FILE_PATH_PRODUCTS.$uuid; //path for temporary files
+$cachepath = CACHE_FILE_PATH.$cacheKey; //path to cached files
 
-//check if files are already cached
+$minfilename = "infusion-".$ver.".zip"; //filename of minified zip
+$srcfilename = "infusion-".$ver."-src.zip"; //filename of source zip
+
+$tmpfilename = $tmppath."/".$minfilename; //path and filename of temporary zip file
+$filename = $min ? $minfilename : $srcfilename; //filename desired (either source or zip)
+$filepath = $cachepath."/".$filename; //path and filename of cached file
+
+//check if file are already cached
 if (!empty($cacheKey)) {
-    $cache_query = "SELECT * FROM cache WHERE id = '{$cacheKey}'";
+    $cache_query = "SELECT * FROM cache WHERE id = '{$cacheKey}' AND minified = ".$intMin;
     $cache_result = mysql_query($cache_query);
     if (!$cache_result) {
         returnError("Cannot complete cache retrieval query");
@@ -180,15 +187,8 @@ if (!empty($cacheKey)) {
 	}
 }
 
-//files are not cached - go through build process
+//file is not cached - go through build process
 if (empty($cache_row)) {
-    //build minified file
-    $successExecuteMin = executeBuildScript($includes, $excludes, $uuid, $min);
-    if (!$successExecuteMin)
-    {
-        returnError("Cannot execute build script");
-        exit (1);
-    }
     
     //create cache directory
     if (!file_exists($cachepath)) {
@@ -198,29 +198,22 @@ if (empty($cache_row)) {
         }
     }
     
-    //copy file to cache directory
-    if (!@copy($tmppath."/".$minfilename, $cachepath."/".$minfilename)) {
-        returnError("Cannot copy minified files to cache");
-        exit(1);
-    }
-    
-    //build source file
-    $successExecuteSrc = executeBuildScript($includes, $excludes, $uuid, $min);
-    if (!$successExecuteSrc)
+    //build file
+    $successExecute = executeBuildScript($includes, $excludes, $uuid, !$min);
+    if (!$successExecute)
     {
-        returnError("Cannot execute source build script");
+        returnError("Cannot execute build script");
         exit (1);
     }
     
-    //copy source file to cache
     //copy file to cache directory
-    if (!@copy($tmppath."/".$minfilename, $cachepath."/".$srcfilename)) {
-        returnError("Cannot copy source files to cache");
-        exit(1);
-    }
-        
+    if (!@copy($tmpfilename, $filepath)) {
+            returnError("Cannot copy temp file to cache");
+            exit(1);
+     }
+    
     //insert cache entry for this build
-    $insert_query = "INSERT INTO cache (id) VALUES('$cacheKey')";
+    $insert_query = "INSERT INTO cache (id, minified) VALUES('$cacheKey', ".$intMin.")";
     $insert_result = mysql_query($insert_query);
     if (!$insert_result) {
         returnError("Cannot insert cache entry for this build");
@@ -230,9 +223,7 @@ if (empty($cache_row)) {
 }
 
 //deliver file from cache location to user
-$filename = $min ? $minfilename : $srcfilename;
-$filepath = $cachepath."/".$filename;
-$successDeliver = deliverBuildFile($cacheKey, $filepath, $filename);
+$successDeliver = deliverBuildFile($cacheKey, $filepath, $filename, $intMin);
 if (!$successDeliver)
 {
     returnError("Cannot deliver file");

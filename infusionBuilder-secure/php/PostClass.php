@@ -18,8 +18,6 @@ define("MINIFIED", "minified");
 define("SELECTION_CHOICE", "typeSelections");
 define("MODULE_SELECTIONS", "moduleSelections");
 
-define("SOURCE", "source");
-
 class PostClass
 {
     private $minified = true;
