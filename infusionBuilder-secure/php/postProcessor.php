@@ -118,6 +118,32 @@ function deliverBuildFile($key, $filepath, $filename, $intMin)
     echo fpassthru($fp);
 }
 
+/**
+ * Performs a mysql query to determine if the requested file is already cached.
+ * If the file is cached already, the row is returned, otherwise FALSE.
+ *
+ * @param object $cacheKey      The key, which is the directory name of the stored file
+ * @param object $intMin        The integer value representing minified or source download
+ * @param object $error_message An error string for if the mysql query fails
+ * @return object $cache_row    A row of data from the cache table if successful, FALSE otherwise
+ */
+function checkCacheMysql($cacheKey, $intMin, $error_message) { 
+      $cache_query = "SELECT * FROM cache WHERE id = '{$cacheKey}' AND minified = ".$intMin;
+    $cache_result = mysql_query($cache_query);
+    if (!$cache_result) { //mysql_query resulted in error
+        returnError($error_message);
+        exit (1);
+    }
+
+    //a valid resource was obtained, but the cache may still be empty if no rows were returned
+    $is_cached = false;
+    if (mysql_num_rows($cache_result) == 1) { //must be 0 or 1 because of table restrictions
+        $is_cached = true;
+    }
+    mysql_free_result($cache_result);
+    return $is_cached;
+}
+
 //START OF EXECUTION
 
 //process posted values
@@ -174,21 +200,11 @@ $filepath = $cachepath."/".$filename; //path and filename of cached file
 
 //check if file are already cached
 if (!empty($cacheKey)) {
-    $cache_query = "SELECT * FROM cache WHERE id = '{$cacheKey}' AND minified = ".$intMin;
-    $cache_result = mysql_query($cache_query);
-    if (!$cache_result) {
-        returnError("Cannot complete cache retrieval query");
-        exit (1);
-    }
-	
-	if (mysql_num_rows($cache_result) == 1) {
-        $cache_row = mysql_fetch_assoc($cache_result);
-        mysql_free_result($cache_result);
-	}
+    $is_cached = checkCacheMysql($cacheKey, $intMin, "Cannot complete cache retrieval query");
 }
 
 //file is not cached - go through build process
-if (empty($cache_row)) {
+if (!$is_cached) {
     
     //create cache directory
     if (!file_exists($cachepath)) {
@@ -216,10 +232,12 @@ if (empty($cache_row)) {
     $insert_query = "INSERT INTO cache (id, minified) VALUES('$cacheKey', ".$intMin.")";
     $insert_result = mysql_query($insert_query);
     if (!$insert_result) {
-        returnError("Cannot insert cache entry for this build");
-        exit(1);
-    }
-        
+        $is_cached_again = checkCacheMysql($cacheKey, $intMin, "Error occurred inserting cache entry for this build");
+        if (!$is_cached_again) {
+            returnError("Cannot insert cache entry for this build");
+            exit(1);
+        }
+    }      
 }
 
 //deliver file from cache location to user
