@@ -87,13 +87,18 @@
 				value="${mysql_password}" />
 		</replace>
 	</target>
+    
+    <target name="cleanup_script"
+        description="Gives the script to clean up temp directories executable permissions">
+            <chmod file="${cleanup_script}" perm="u+x"/>
+    </target>
 
 	<target name="cleanup" description="Removes unneeded directories after deploy">
 		<delete dir="${build_tests}" />
 	</target>
     
  	<target name="deploy" description="Deploy the production version of the Infusion Builder"
-		depends="setup_server_props, backup, database_backup, database_setup, setup, minify, make_dirs, config, cleanup">
+		depends="setup_server_props, backup, database_backup, database_setup, setup, minify, make_dirs, config, cleanup_script, cleanup">
 	</target>
     
     <target name="daily" description="Deploy the Infusion Builder on the daily build site"
