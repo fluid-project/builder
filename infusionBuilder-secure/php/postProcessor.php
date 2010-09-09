@@ -104,18 +104,20 @@ function deliverBuildFile($key, $filepath, $filename, $intMin)
     if (!$result) return false;
 	
     //deliver file
-	$fp = @fopen($filepath, "r");
+	$fp = @fopen($filepath, "rb");
 	if ($fp == false)
     {
         return false;
     }
     $stats = fstat($fp);
     $size = $stats[size];
-        
+    fclose($fp);
+    
     header("Content-Type: archive/zip");
     header("Content-Disposition: attachment; filename=$filename");
     header("Content-Length: $size");
-    echo fpassthru($fp);
+    echo @file_get_contents($filepath);
+    exit;
 }
 
 /**
