@@ -92,8 +92,32 @@ input[type=submit].fl-infusionBuilder-button.fl-infusionBuilder-downloadbutton {
 	width:200px;
 	float:right;
 }
+.fl-infusionBuilder-serverError {   
+    width:200px;
+    float:right;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #FF0000;
+    margin: 1em 0 1em 0;
+    background-color: #FFFFFF;
+}
 /*******************************************************/
 .fl-theme-mist .fl-infusionBuilder .fl-infusionBuilder-selected {
     background-color: #cce4ff;
     color:#000;
+}
+.fl-infusionBuilder-spinner {
+    float: left;
+    clear: both;
+    margin-top: -2.2em;
+    margin-left: 2em;
+}
+.fl-infusionBuilder-spinner-img {
+    width: 22px;
+    height: 22px;
+}
+.fl-infusionBuilder-download-frame {
+    display: none;
+    width: 0px;
+    height: 0px;
 }

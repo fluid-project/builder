@@ -192,6 +192,7 @@
         };
         
         fluid.selfRender(that.locate("compressionControls"), generatedTree(that), renderOptions);
+        that.locate("spinner").hide();
     };
     
     /**
@@ -476,7 +477,7 @@
         if (selections.length > 0) {
             modulesSelectedString = getNamesString(selections);
         }
-        that.locate("moduleSelections").html(modulesSelectedString);
+        that.locate("moduleSelectionsDesc").html(modulesSelectedString);
     };
 
     var updateHiddenFormWithSelections = function (that) {
@@ -504,8 +505,36 @@
         setupQuickSelect(that);
 
         that.locate("downloadButton").click(function () {
-            that.locate("controls").hide();
-            that.locate("downloadMessage").show();
+            // clean up the server error message if any
+            that.locate("serverError").html("");
+            
+            // diable all checkboxes/radio buttons/buttons when the server is building the requested build
+            that.setControlsStatesAtDownloadStart();
+             
+            // send ajax request to php server for the build 
+            $.ajax({type: "POST", 
+                    url:'../php/builder.php', 
+                    
+                    data: "moduleSelections="+that.locate("formModuleSelections").val()+"&typeSelections="+that.locate("formTypeSelections").val(),
+                   
+                   success: function(data) {
+                       // enable all the selection controls
+                       that.setControlsStatesAtDownloadEnd();
+                       
+                       // change iframe url to pop up the download dialog.
+                       // This is a workaround for the firefox issue that the progress spinner only spins
+                       // the first time after the page loads.
+                       that.locate("downloadFrame").attr('src', "../php/download.php?path="+data);
+                   }, 
+                   
+                   error: function(xhr, errorType, exception) {
+                       // enable all the selection controls
+                       that.setControlsStatesAtDownloadEnd();
+                       
+                       // display server error message
+                       that.locate("serverError").html($(xhr.responseText).text());
+                   }
+            });
         });
     };
 
@@ -534,6 +563,41 @@
         var that = fluid.initView("fluid.infusionBuilder", container, options);		        
         setupInfusionBuilder(that);
         
+        /**
+         * This function is called at the start of the download to disable all controls
+         * (check boxes/radio buttons/buttons) on the page and show the download spinner. 
+         * @param {Object} that, the component
+         */
+        that.setControlsStatesAtDownloadStart = function () {
+            var selectionControls = that.locate("selectionsContainer");
+            $(selectionControls).find('input').attr("disabled", "disabled");
+
+            var compressionControls = that.locate("compressionControls");
+            $(compressionControls).find('input').attr("disabled", "disabled");
+            that.locate("checkAll").attr("disabled", "disabled");
+            that.locate("unCheckAll").attr("disabled", "disabled");
+            that.locate("downloadButton").attr("disabled", "disabled");
+            that.locate("spinner").show();
+        };
+
+        /**
+         * This function is called at the end of the download to enable all controls
+         * (check boxes/radio buttons/buttons) on the page and hide the download spinner. 
+         * @param {Object} that, the component
+         */
+        that.setControlsStatesAtDownloadEnd = function () {
+            var selectionControls = that.locate("selectionsContainer");
+            $(selectionControls).find('input').removeAttr("disabled");
+
+            var compressionControls = that.locate("compressionControls");
+            $(compressionControls).find('input').removeAttr("disabled");
+
+            that.locate("checkAll").removeAttr("disabled");
+            that.locate("unCheckAll").removeAttr("disabled");
+            that.locate("downloadButton").removeAttr("disabled");
+            that.locate("spinner").hide();
+        };
+
         return that;
     };
     
@@ -586,6 +650,7 @@
             selectionsContainer: ".flc-infusionBuilder-selectionsContainer",
             
             moduleSelections: ".flc-infusionBuilder-moduleSelections",
+            moduleSelectionsDesc: ".flc-infusionBuilder-moduleSelections-desc",
             
             groups: ".flc-infusionBuilder-group",
             groupName: ".flc-infusionBuilder-groupName",
@@ -605,11 +670,14 @@
             unCheckAll: ".flc-infusionBuilder-unCheckAll",
             
             controls: ".flc-infusionBuilder-downloadControls",
-            downloadMessage: ".flc-infusionBuilder-downloadMsg",
             downloadButton: ".flc-infusionBuilder-downloadButton",
+            spinner: ".flc-infusionBuilder-spinner",
             
             formModuleSelections: "#moduleSelections",
-            formTypeSelections: "#typeSelections"
+            formTypeSelections: "#typeSelections",
+            
+            serverError: ".flc-infusionBuilder-serverError", 
+            downloadFrame: ".flc-infusionBuilder-download-frame"
         },
         strings: {},
         

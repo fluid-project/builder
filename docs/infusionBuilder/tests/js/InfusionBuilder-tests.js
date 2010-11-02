@@ -379,6 +379,37 @@
         };
         
         /**
+         * Performs tests to ensure 'download' performs as expected
+         */
+        that.downloadTests = function () {
+            expect(11);
+            
+            // ensure the download button is disabled by default, when no module is selected
+            jqUnit.assertTrue("Download button is disabled by default", $(".flc-infusionBuilder-downloadButton:disabled"));            
+            jqUnit.notVisible("Download spinner is invisible by default", $(".flc-infusionBuilder-spinner"));            
+            
+            // ensure the download button is enabled when there's module selected
+            $(".flc-infusionBuilder-checkAll").simulate("click"); 
+            jqUnit.assertEquals("Download button is enabled when there is module(s) selected", 0, $(".flc-infusionBuilder-downloadButton:disabled").length);
+                        
+            // test the function which is called at the start of the download
+            testComponent.setControlsStatesAtDownloadStart(testComponent);
+            
+            jqUnit.assertEquals("All modules are disabled by calling the function setControlsStatesAtDownloadStart()", numModules, $(".flc-infusionBuilder-module input:checkbox:disabled", INFUSION_BUILDER_SELECTOR).length);
+            jqUnit.assertEquals("All radio buttons are disabled by calling the function setControlsStatesAtDownloadStart()", 2, $(".flc-infusionBuilder-selectionModifier input:disabled").length);
+            jqUnit.assertEquals("All buttons are disabled by calling the function setControlsStatesAtDownloadStart()", 3, $(".flc-infusionBuilder-downloadControls button:disabled").length);
+            jqUnit.isVisible("Download spinner is hidden by calling the function setControlsStatesAtDownloadStart()", $(".flc-infusionBuilder-spinner"));
+
+            // test the function which is called at the end of the download
+            testComponent.setControlsStatesAtDownloadEnd(testComponent);
+            
+            jqUnit.assertEquals("All modules are enabled by calling the function setControlsStatesAtDownloadEnd()", 0, $(".flc-infusionBuilder-module input:checkbox:disabled", INFUSION_BUILDER_SELECTOR).length);
+            jqUnit.assertEquals("All radio buttons are disabled by calling the function setControlsStatesAtDownloadEnd()", 0, $(".flc-infusionBuilder-selectionModifier input:disabled").length);
+            jqUnit.assertEquals("All buttons are disabled by calling the function setControlsStatesAtDownloadEnd()", 0, $(".flc-infusionBuilder-downloadControls button:disabled").length);
+            jqUnit.notVisible("Download spinner is showed by calling the function setControlsStatesAtDownloadEnd()", $(".flc-infusionBuilder-spinner"));
+        };
+        
+        /**
          * Generates a function to test auto-checking of a single module.
          *
          * @param {Object} checkedModuleIndex The index of the module to be checked and then tested.
@@ -533,6 +564,7 @@
         tests.test("Rendering of Elements", testingFunctions.renderingTests);
         tests.test("Select all Modules", testingFunctions.selectAllTests);
         tests.test("Deselect all Modules", testingFunctions.deselectAllTests);
+        tests.test("Download button", testingFunctions.downloadTests);
         tests.test("Autochecking single Module", testingFunctions.generateAutoCheckingTestFunc(PAGER_INDEX));
         tests.test("Autochecking multiple Modules", testingFunctions.generateAutoCheckingTwoModulesTestFunc(INLINE_EDIT_INDEX, REORDERER_INDEX));
         tests.test("Auto-unchecking", testingFunctions.generateAutoUncheckingFunc(PROGRESS_INDEX, UIOPTIONS_INDEX));
@@ -575,6 +607,7 @@
         tests.test("Rendering of Elements", testingFunctions.renderingTests);
         tests.test("Select all Modules", testingFunctions.selectAllTests);
         tests.test("Deselect all Modules", testingFunctions.deselectAllTests);
+        tests.test("Download button", testingFunctions.downloadTests);
         tests.test("Autochecking single module with one dependency ", testingFunctions.generateAutoCheckingTestFunc(FIRST_MODULE_INDEX));
         tests.test("Autochecking single module no dependencies", testingFunctions.generateAutoCheckingTestFunc(SECOND_MODULE_INDEX));
         tests.test("Autochecking multiple Modules", testingFunctions.generateAutoCheckingTwoModulesTestFunc(SECOND_MODULE_INDEX, FIRST_MODULE_INDEX));

@@ -102,22 +102,6 @@ function deliverBuildFile($key, $filepath, $filename, $intMin)
     $query = "UPDATE cache SET counter = counter + 1 WHERE id='{$key}' AND minified=".$intMin;
     $result = mysql_query($query);
     if (!$result) return false;
-	
-    //deliver file
-	$fp = @fopen($filepath, "rb");
-	if ($fp == false)
-    {
-        return false;
-    }
-    $stats = fstat($fp);
-    $size = $stats[size];
-    fclose($fp);
-    
-    header("Content-Type: archive/zip");
-    header("Content-Disposition: attachment; filename=$filename");
-    header("Content-Length: $size");
-    echo @file_get_contents($filepath);
-    exit;
 }
 
 /**
@@ -130,7 +114,7 @@ function deliverBuildFile($key, $filepath, $filename, $intMin)
  * @return object $cache_row    A row of data from the cache table if successful, FALSE otherwise
  */
 function checkCacheMysql($cacheKey, $intMin, $error_message) { 
-      $cache_query = "SELECT * FROM cache WHERE id = '{$cacheKey}' AND minified = ".$intMin;
+    $cache_query = "SELECT * FROM cache WHERE id = '{$cacheKey}' AND minified = ".$intMin;
     $cache_result = mysql_query($cache_query);
     if (!$cache_result) { //mysql_query resulted in error
         returnError($error_message);
@@ -244,9 +228,14 @@ if (!$is_cached) {
 
 //deliver file from cache location to user
 $successDeliver = deliverBuildFile($cacheKey, $filepath, $filename, $intMin);
-if (!$successDeliver)
+if ($successDeliver===false)
 {
     returnError("Cannot deliver file");
+} else {
+    //json formatted output
+    //encapsulate the actual file path, the sender should be able to use 
+    //just the cacheKey and the min value to generate the filepath.
+    echo json_encode(array($cacheKey, $intMin));
 }
 mysql_close($link);
 ?>
