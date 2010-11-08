@@ -5,7 +5,7 @@
     <title>Infusion Builder Tests</title>
     
     <!--  This is the jqUnit test css file -->
-    <link rel="Stylesheet" media="screen" href="../../infusion/src/webapp/tests/lib/qunit/css/testsuite.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../infusion/src/webapp/tests/lib/qunit/css/qunit.css" />
     
     <!--  These are the required javascript modules -->
     <script type="text/javascript" src="../../infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
@@ -16,10 +16,10 @@
     <script type="text/javascript" src="../../infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
     <script type="text/javascript" src="../../infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
     
-    <!--  These are the jqUnit test js files -->
-    <script type="text/javascript" src="../../infusion/src/webapp/tests/lib/jquery-ui/js/jquery.simulate.js"></script>
-    <script type="text/javascript" src="../../infusion/src/webapp/tests/lib/qunit/js/testrunner.js"></script>
-    <script type="text/javascript" src="../jqUnit/js/jqUnit.js"></script>
+    <!--  These are the jqUnit test framework js files -->
+    <script type="text/javascript" src="../../infusion/src/webapp/tests/lib/qunit/js/qunit.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/tests/test-core/jqUnit/js/jqUnit.js"></script>
+    <script type="text/javascript" src="../../infusion/src/webapp/tests/lib/jquery-ui/js/jquery.simulate.js"></script>        
 
     <!--  Include the javascript files you are testing here -->
     <script type="text/javascript" src="../../js/InfusionBuilder.js"></script>
@@ -31,10 +31,12 @@
 </head>
 
 <body id="body">
-    <h1 id="header">Infusion Builder Tests</h1>
-    <h2 id="banner"></h2>
-    <h2 id="userAgent"></h2>
-    <ol id="tests"></ol>
+    <!-- This is the markup that jqUnit will look for when running tests and displaying the results -->
+    <h1 id="qunit-header">Infusion Builder Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
 
     <!-- Test HTML. This will get populated from InfusionBuilder.html via a call to fetchTemplate() -->
     <!-- Remove style="display:none" so that the visibility of the component can be checked -->

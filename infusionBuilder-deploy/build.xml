@@ -4,15 +4,16 @@
 
 	<property environment="env" />
 	<property file="build.properties" />
+	<property file="${home}/infusion-builder.properties" /> 
 
-    <target name="setup_server_props" description="Loads server properties">
-        <property file="server_build.properties" />
-    </target>
+	<target name="setup_server_props" description="Loads server properties">
+		<property file="server_build.properties" />
+	</target>
 
-    <target name="setup_local" description="Loads local properties">
-        <property file="local_build.properties" />
-    </target>
-    
+	<target name="setup_local" description="Loads local properties">
+		<property file="local_build.properties" />
+	</target>
+
 	<target name="backup"
 		description="Backs up the infusion builder directories"
 		depends="timestamp">
@@ -22,13 +23,12 @@
 		<move file="${build_deploy}" todir="${backup}/${MY_TODAY}"
 			failonerror="false" />
 	</target>
-    
-    <target name="delete_old"
-        description="Removes the infusion builder directories">
-        <delete dir="${secure_deploy}" failonerror="false" />
-        <delete dir="${build_deploy}" failonerror="false" />
-    </target>
-
+	
+	<target name="delete_old"
+		description="Removes the infusion builder directories">
+		<delete dir="${secure_deploy}" failonerror="false" />
+		<delete dir="${build_deploy}" failonerror="false" />
+	</target>
 
 	<target name="timestamp" description="sets the time stamp properties">
 		<tstamp>
@@ -40,17 +40,18 @@
 		description="Backs up the mysql database"
 		depends="timestamp">
 		<exec executable="mysqldump"
-			output="${backup}/${MY_TODAY}/${mysql_database_name}.sql">
+			output="${backup}/${MY_TODAY}/${mysql_db_name}.sql">
 			<arg line="-u ${mysql_user}" />
 			<arg line="--password=${mysql_password}" />
-			<arg line="${mysql_database_name}" />
+			<arg line="${mysql_db_name}" />
 		</exec>
 	</target>
 
 	<target name="database_create">
-		<exec executable="mysql" input="${basedir}/create-database-and-user.sql">
+		<exec executable="mysql">
 			<arg line="-u ${mysql_user}" />
 			<arg line="--password=${mysql_password}" />
+			<arg line='--execute="CREATE DATABASE IF NOT EXISTS ${mysql_db_name};grant all on ${mysql_db_name}.* to ${mysql_user}@localhost;"' />
 		</exec>
 	</target>
 
@@ -58,6 +59,7 @@
 		<exec executable="mysql" input="${basedir}/create-and-clear-builder-cache.sql">
 			<arg line="-u ${mysql_user}" />
 			<arg line="--password=${mysql_password}" />
+			<arg line="--database=${mysql_db_name}" />
 		</exec>
 	</target>
 
@@ -85,6 +87,8 @@
 				value="${mysql_user}" />
 			<replacefilter token="${mysql_password_replace_token}"
 				value="${mysql_password}" />
+			<replacefilter token="${mysql_db_replace_token}"
+				value="${mysql_db_name}" />
 		</replace>
 	</target>
     

@@ -24,7 +24,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
     define ("SIMPLETEST_PATH", "/path/to/simpleTest/");
     define("DB_USER", "mysql_user");
     define("DB_PASS", "mysql_password");
-    
+    define("DB_NAME", "mysql_db_name");
     
     
     // Do not change these unless you know what you are doing
@@ -37,6 +37,6 @@ https://source.fluidproject.org/svn/LICENSE.txt
     define("OUTPUT_FILE_PATH_PRODUCTS", SECURE_PATH."tmp/products/");
     define("CACHE_FILE_PATH", SECURE_PATH."cache/");
     define("CACHE_FILE", CACHE_FILE_PATH."json-cache.txt");
-    define("DB_NAME", "localhost");
+    define("DB_HOST", "localhost");
 
 ?>

@@ -11,6 +11,9 @@
 /**
  * Tests infusion package download.
  */
+
+require_once (TESTCASE_PATH.DISTANT_PATH.'PostClass.php');
+
 class BuilderDownloadTest extends WebTestCase {    
     var $_infusion_builder_url;
     var $_version;
@@ -19,11 +22,12 @@ class BuilderDownloadTest extends WebTestCase {
     //constructor
     function __construct(){
         $this->_infusion_builder_url = TEST_BASE_PATH . TEST_INFUSION_BUILDER_URL;
-        $this->_version = TEST_INFUSION_VERSION;
+        $pc = new PostClass();
+        $this->_version = $pc->getFluidVersionNumber();
 
         //setup db 
-        $this->db = @mysql_connect(DB_NAME . ':3306', DB_USER, DB_PASS);	
-        @mysql_select_db('build_cache', $this->db);
+        $this->db = @mysql_connect(DB_HOST, DB_USER, DB_PASS);	
+        @mysql_select_db(DB_NAME, $this->db);
     }
 
     /**

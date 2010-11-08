@@ -149,12 +149,12 @@ if (!$successPost)
 }
 
 //connect to database
-$link = @mysql_connect(DB_NAME, DB_USER, DB_PASS);
+$link = @mysql_connect(DB_HOST, DB_USER, DB_PASS);
 if (!$link) {
     returnError("Cannot connect to cache database");
     exit (1);
 }
-$db_selected = @mysql_select_db('build_cache', $link);
+$db_selected = @mysql_select_db(DB_NAME, $link);
 if (!$db_selected) {
     returnError("Cannot select cache database");
     exit (1);
