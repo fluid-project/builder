@@ -21,7 +21,7 @@ class BuilderDownloadTest extends WebTestCase {
 
     //constructor
     function __construct(){
-        $this->_infusion_builder_url = TEST_BASE_PATH . TEST_INFUSION_BUILDER_URL;
+        $this->_infusion_builder_url = TEST_INFUSION_BUILDER_URL;
         $pc = new PostClass();
         $this->_version = $pc->getFluidVersionNumber();
 
