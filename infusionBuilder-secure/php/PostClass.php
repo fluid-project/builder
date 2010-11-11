@@ -51,10 +51,9 @@ class PostClass
     private function retrieveFluidVersionNumber() {
         $buildPropertiesContents = @file_get_contents(BUILD_PROPS);
         if ($buildPropertiesContents == false) return;
-        preg_match_all('/fluid_version = [\d.]*/', $buildPropertiesContents, $version);
-        $tempArray = preg_split("/ = /", $version[0][0]);
+        preg_match('/fluid_version = (.*)/', $buildPropertiesContents, $version);
  
-        $this->fluidVersionNumber = $tempArray[1];
+        $this->fluidVersionNumber = trim($version[1]);
     }
 
 /**
@@ -84,15 +83,15 @@ class PostClass
         {
             $moduleArray = preg_split("/,/",$moduleString);
 
-			//check that values are valid by comparing to array of valid modules
-			//at same time create an array with module keys to use for caching system
-			$this->module_keys = array();
+            //check that values are valid by comparing to array of valid modules
+            //at same time create an array with module keys to use for caching system
+            $this->module_keys = array();
             foreach ($moduleArray as $selection)
             {
             	$array_key = array_search($selection, $valid);
                 if (gettype($array_key) == 'integer' && $array_key >= 0)
                 {
-                	$this->module_keys[] = $array_key; 
+                    $this->module_keys[] = $array_key; 
                     $this->includes .= $selection.", ";
                  }
             }

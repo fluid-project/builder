@@ -121,10 +121,10 @@ class BuilderDownloadTest extends WebTestCase {
      */
     function testMultipleModuleDownloadMin(){
         $params = array('Download'           => 'Download', 
-                        'moduleSelections'   => 'progress,jQuery,jQueryUICore,framework,jQueryDelegatePlugin',
+                        'moduleSelections'   => 'progress,jQuery,jQueryUICore,framework',
                         'typeSelections'     => 'minified');
         $this->post($this->_infusion_builder_url, $params);
-        $this->assertText('["0_9_17_18_20_'.$this->_version.'",1]');
+        $this->assertText('["0_9_17_18_'.$this->_version.'",1]');
     }
     
     /**
@@ -134,10 +134,10 @@ class BuilderDownloadTest extends WebTestCase {
     function testMultipleModuleDownloadSrc(){
         $this->setConnectionTimeout(300); 
         $params = array('Download'           => 'Download', 
-                        'moduleSelections'   => 'framework,renderer,progress,undo,fastXmlPull,jQuery,jQueryUICore,jQueryDelegatePlugin',
+                        'moduleSelections'   => 'framework,renderer,progress,undo,fastXmlPull,jQuery,jQueryUICore',
                         'typeSelections'    => 'source');
         $this->post($this->_infusion_builder_url, $params);        
-        $this->assertText('["0_6_9_13_15_17_18_20_'.$this->_version.'",0]');
+        $this->assertText('["0_6_9_13_15_17_18_'.$this->_version.'",0]');
     }    
 }
 ?>

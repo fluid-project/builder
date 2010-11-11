@@ -110,9 +110,9 @@ class TestPostClass extends UnitTestCase
 
     function testValidateIncludes5()
     {
-        $test = "framework,jQuery,jQueryUICore,jQueryDelegatePlugin";
-        $expectedIncludes = "framework, jQuery, jQueryUICore, jQueryDelegatePlugin";
-        $expectedKey = "0_17_18_20_".$this->postVariables->getFluidVersionNumber();
+        $test = "framework,jQuery,jQueryUICore";
+        $expectedIncludes = "framework, jQuery, jQueryUICore";
+        $expectedKey = "0_17_18_".$this->postVariables->getFluidVersionNumber();
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
     }	
