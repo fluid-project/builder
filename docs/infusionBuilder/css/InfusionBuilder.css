@@ -110,11 +110,11 @@ input[type=submit].fl-infusionBuilder-button.fl-infusionBuilder-downloadbutton {
     float: left;
     clear: both;
     margin-top: -2.2em;
-    margin-left: 2em;
+    margin-left: 1em;
 }
 .fl-infusionBuilder-spinner-img {
-    width: 22px;
-    height: 22px;
+    width: 19px;
+    height: 19px;
 }
 .fl-infusionBuilder-download-frame {
     display: none;
