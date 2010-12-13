@@ -51,7 +51,10 @@ h1 {
     color:#000;
 }
 .fl-infusionBuilder :focus {
-    outline:2px solid #fd7;
+    outline:0px;
+}
+.fl-infusionBuilder input:focus, .fl-infusionBuilder button:focus {
+    outline:2px solid #fd7; 
 }
 .fl-infusionBuilder :focus ~ label {
     color:#fd7;
@@ -77,24 +80,12 @@ h1 {
     -moz-border-radius:10px;
 }
 
-.fl-infusionBuilder .fl-button-left {
-    margin:5px 0;
-    width:200px;
-}
+.fl-infusionBuilder .fl-infusionBuilder-button[disabled] {
+    background-color: #171717;
+    color: #3c3c3e;
+    border-color: #3c3c3e;
+} 
 
-.fl-infusionBuilder .fl-button-left {
-    background-image:url("../images/buttons-cap.png");
-}
-.fl-infusionBuilder .fl-button-inner {
-    background-image:url("../images/buttons-stretch.png");
-    font-weight:bold;
-    color:#fff;
-}
-
-.fl-infusionBuilder .fl-button-left[disabled] {
-    opacity:0.25;
-    filter:alpha(opacity=25);    
-}
 .fl-infusionBuilder-instructions {
     margin:10px 0;
     padding:10px;

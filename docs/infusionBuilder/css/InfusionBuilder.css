@@ -11,15 +11,11 @@
     margin-bottom:5px;
     border-bottom:2px solid #ccc;
 }
-.fl-infusionBuilder button {
-	background:#ccc;
-	border:0;
-}
 .fl-infusionBuilder ol li {
     list-style-type:none;
     display:block;
-	zoom:1;
-	padding:0;
+    zoom:1;
+    padding:2px;
 }
 .fl-infusionBuilder ol li:hover {
     background-color:#fd7;
@@ -72,22 +68,19 @@
     padding:10px;
 }
 
-.fl-infusionBuilder .fl-infusionBuilder-button,
-input[type=submit].fl-infusionBuilder-button.fl-infusionBuilder-downloadbutton {
-    border:none;
-    background-color:transparent;
-    padding:0 0 0 13px;
-}
 .fl-infusionBuilder .fl-infusionBuilder-button {
-	width:93%;
-	background-repeat:no-repeat;
-	background-color:transparent;
-	background-position:left center;
-}
-.fl-infusionBuilder .fl-infusionBuilder-button .fl-button-inner {
-	float:none;
+	background-color: #585858;
+	color: #ffffff;
+	width: 93%;
 	display:block;
+	text-align:center;
+    padding:3px 0;
+    margin: 10px auto 0px auto;
+    border: 1px solid white;
+    font-weight:bold;
+
 }
+
 .fl-infusionBuilder-downloadOptions {	
 	width:200px;
 	float:right;
@@ -109,7 +102,7 @@ input[type=submit].fl-infusionBuilder-button.fl-infusionBuilder-downloadbutton {
 .fl-infusionBuilder-spinner {
     float: left;
     clear: both;
-    margin-top: -2.2em;
+    margin-top: -1.7em;
     margin-left: 1em;
 }
 .fl-infusionBuilder-spinner-img {
