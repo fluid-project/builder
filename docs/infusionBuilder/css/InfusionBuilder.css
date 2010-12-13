@@ -42,9 +42,9 @@
 	float:left;
 }
 .fl-infusionBuilder .fl-infusionBuilder-description {
-    color : #808080;
+    color: #808080;
     font-weight: normal;
-    padding:0 5px 5px 30px;
+    padding:0;
     font-size:.85em;
 }
 .fl-infusionBuilder .fl-col ol li div {
