@@ -73,28 +73,28 @@ class TestPostClass extends UnitTestCase
      */
     function testValidateIncludes1()
     {
-
-        $test = "fss,fssReset,fssLayout,fssText,fssThemes";
-        $expectedIncludes = "fss, fssReset, fssLayout, fssText, fssThemes";
-		$expectedKey = "1_2_3_4_5_".$this->postVariables->getFluidVersionNumber();
+        $test = "Renderer,jQuery,framework,fastXmlPull";
+        $expectedIncludes = "jQuery, framework, fastXmlPull";
+        $expectedKey = "0_13_15_".$this->postVariables->getFluidVersionNumber();
+        
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
-		$this->assertEqual($this->postVariables->getKey(), $expectedKey);
+        $this->assertEqual($this->postVariables->getKey(), $expectedKey);
     }
 
     function testValidateIncludes2()
     {
         $test = "";
         $expectedIncludes = "";
-		$expectedKey = "";
+        $expectedKey = "";
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
     }
 
     function testValidateIncludes3()
     {
-        $test = "fss,fssReser,fssLayout";
-        $expectedIncludes = "fss, fssLayout";
-		$expectedKey = "1_3_".$this->postVariables->getFluidVersionNumber();
+        $test = "Renderer,jQuery,framework,fastXmlPull";
+        $expectedIncludes = "jQuery, framework, fastXmlPull";
+        $expectedKey = "0_13_15_".$this->postVariables->getFluidVersionNumber();
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
    }
@@ -112,7 +112,7 @@ class TestPostClass extends UnitTestCase
     {
         $test = "framework,jQuery,jQueryUICore";
         $expectedIncludes = "framework, jQuery, jQueryUICore";
-        $expectedKey = "0_17_18_".$this->postVariables->getFluidVersionNumber();
+        $expectedKey = "0_15_16_".$this->postVariables->getFluidVersionNumber();
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
     }	

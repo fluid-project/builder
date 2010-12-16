@@ -62,7 +62,7 @@ class BuilderDownloadTest extends WebTestCase {
         $this->post($this->_infusion_builder_url, $params);
 
         //downloaded, check if database has this entry
-        $expected = '17_'.$this->_version;
+        $expected = '15_'.$this->_version;
         $sql = "SELECT id FROM cache WHERE id='$expected' AND minified=0";
         $result = mysql_query($sql, $this->db);
         list($actual) = mysql_fetch_array($result);
@@ -75,7 +75,7 @@ class BuilderDownloadTest extends WebTestCase {
      * [key=17_version, type=0] should increment by 1.
      */
     function testCacheIncrement(){        
-        $version = '17_'.$this->_version;
+        $version = '15_'.$this->_version;
         $sql = "SELECT counter FROM cache WHERE id='$version' AND minified=0";
 
         //get the current count
@@ -102,7 +102,7 @@ class BuilderDownloadTest extends WebTestCase {
                         'moduleSelections'   => 'jQuery',
                         'typeSelections'     => 'minified');
         $this->post($this->_infusion_builder_url, $params);
-        $this->assertText('["17_'.$this->_version.'",1]');
+        $this->assertText('["15_'.$this->_version.'",1]');
     }
     
     /**
@@ -113,7 +113,7 @@ class BuilderDownloadTest extends WebTestCase {
                         'moduleSelections'   => 'jQuery',
                         'typeSelections'     => 'source');
         $this->post($this->_infusion_builder_url, $params);
-        $this->assertText('["17_'.$this->_version.'",0]');
+        $this->assertText('["15_'.$this->_version.'",0]');
     }
 
     /**
@@ -124,7 +124,7 @@ class BuilderDownloadTest extends WebTestCase {
                         'moduleSelections'   => 'progress,jQuery,jQueryUICore,framework',
                         'typeSelections'     => 'minified');
         $this->post($this->_infusion_builder_url, $params);
-        $this->assertText('["0_9_17_18_'.$this->_version.'",1]');
+        $this->assertText('["0_6_15_16_'.$this->_version.'",1]');
     }
     
     /**
@@ -137,7 +137,7 @@ class BuilderDownloadTest extends WebTestCase {
                         'moduleSelections'   => 'framework,renderer,progress,undo,fastXmlPull,jQuery,jQueryUICore',
                         'typeSelections'    => 'source');
         $this->post($this->_infusion_builder_url, $params);        
-        $this->assertText('["0_6_9_13_15_17_18_'.$this->_version.'",0]');
+        $this->assertText('["0_2_6_11_13_15_16_'.$this->_version.'",0]');
     }    
 }
 ?>
