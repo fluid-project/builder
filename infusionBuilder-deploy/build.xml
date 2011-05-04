@@ -74,7 +74,9 @@
 
 	<target name="make_dirs">
 		<mkdir dir="${secure_tmp}" />
+		<chmod dir="${secure_tmp}" perm="777" />
 		<mkdir dir="${secure_cache}" />
+		<chmod dir="${secure_cache}" perm="775" />
 	</target>
 
 	<target name="config"
