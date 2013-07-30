@@ -31,7 +31,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
     define("PRETREATED_PATH", BUILDER_PATH."infusion/build/pretreated/");
     define("BUILD_SCRIPT_PATH", BUILDER_PATH."infusion/build-scripts/");
     define("BUILD_PROPS", BUILD_SCRIPT_PATH."build.properties");
-    define("BUILD_FILES", BUILDER_PATH."infusion/src/webapp/");
+    define("BUILD_FILES", BUILDER_PATH."infusion/src/");
     define("JSON_SUFFIX", "Dependencies.json"); 
     define("OUTPUT_FILE_PATH_BUILD", SECURE_PATH."tmp/build/");
     define("OUTPUT_FILE_PATH_PRODUCTS", SECURE_PATH."tmp/products/");
