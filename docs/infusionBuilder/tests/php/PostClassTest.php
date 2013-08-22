@@ -75,7 +75,7 @@ class TestPostClass extends UnitTestCase
     {
         $test = "Renderer,jQuery,framework,fastXmlPull";
         $expectedIncludes = "jQuery, framework, fastXmlPull";
-        $expectedKey = "0_13_15_".$this->postVariables->getFluidVersionNumber();
+        $expectedKey = "0_14_17_".$this->postVariables->getFluidVersionNumber();
         
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
@@ -94,7 +94,7 @@ class TestPostClass extends UnitTestCase
     {
         $test = "Renderer,jQuery,framework,fastXmlPull";
         $expectedIncludes = "jQuery, framework, fastXmlPull";
-        $expectedKey = "0_13_15_".$this->postVariables->getFluidVersionNumber();
+        $expectedKey = "0_14_17_".$this->postVariables->getFluidVersionNumber();
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
    }
@@ -112,7 +112,7 @@ class TestPostClass extends UnitTestCase
     {
         $test = "framework,jQuery,jQueryUICore";
         $expectedIncludes = "framework, jQuery, jQueryUICore";
-        $expectedKey = "0_15_16_".$this->postVariables->getFluidVersionNumber();
+        $expectedKey = "0_17_18_".$this->postVariables->getFluidVersionNumber();
         $this->assertEqual($this->postVariables->validateIncludes($test, retrieveModuleList()), $expectedIncludes);
         $this->assertEqual($this->postVariables->getKey(), $expectedKey);
     }	

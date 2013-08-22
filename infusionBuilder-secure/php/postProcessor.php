@@ -54,8 +54,10 @@ function processPostVariables($postVariables)
  */
 function buildAntCommand($incl, $excl, $unique_dir)
 {
-    $command = "cd ".BUILD_SCRIPT_PATH.
-    $command .= " && ant builderBuild";
+    // "unset DYLD_LIBRARY_PATH" command is a work around to fix the build error
+    // "Unable to load native library: libjava.jnilib" when running on Mac
+    $command = "cd ".BUILD_SCRIPT_PATH;
+    $command .= " && unset DYLD_LIBRARY_PATH && ant builderBuild -lib lib/rhino";
     if ($incl) $command .= " -Dinclude=\"".$incl."\"";
     if ($excl) $command .= " -Dexclude=\"".$excl."\"";
     $command .= " -Dproducts=\"".OUTPUT_FILE_PATH_PRODUCTS.$unique_dir."\"";
@@ -81,7 +83,7 @@ function executeBuildScript($includeString, $excludeString, $uuid, $doSource)
 	if ($doSource) {
 	    $antCommand .= " -DnoMinify=\"true\"";
 	}
-    exec($antCommand, $output, $status);    
+    exec($antCommand, $output, $status);
     if (in_array("BUILD SUCCESSFUL", $output))
     {
         return true;
@@ -113,7 +115,7 @@ function deliverBuildFile($key, $filepath, $filename, $intMin)
  * @param object $error_message An error string for if the mysql query fails
  * @return object $cache_row    A row of data from the cache table if successful, FALSE otherwise
  */
-function checkCacheMysql($cacheKey, $intMin, $error_message) { 
+function checkCacheMysql($cacheKey, $intMin, $error_message) {
     $cache_query = "SELECT * FROM cache WHERE id = '{$cacheKey}' AND minified = ".$intMin;
     $cache_result = mysql_query($cache_query);
     if (!$cache_result) { //mysql_query resulted in error
@@ -166,7 +168,7 @@ $uuid_result = mysql_query($uuid_query);
 if (!$uuid_result) {
 	returnError("Cannot complete cache retrieval query");
     exit (1);
-}  
+}
 if (mysql_num_rows($uuid_result) == 1) {
 	$uuid_row = mysql_fetch_assoc($uuid_result);
     mysql_free_result($uuid_result);
@@ -191,7 +193,7 @@ if (!empty($cacheKey)) {
 
 //file is not cached - go through build process
 if (!$is_cached) {
-    
+
     //create cache directory
     if (!file_exists($cachepath)) {
         if (!@mkdir($cachepath, 0755, true)) {
@@ -199,7 +201,7 @@ if (!$is_cached) {
             exit(1);
         }
     }
-    
+
     //build file
     $successExecute = executeBuildScript($includes, $excludes, $uuid, !$min);
     if (!$successExecute)
@@ -207,13 +209,13 @@ if (!$is_cached) {
         returnError("Cannot execute build script");
         exit (1);
     }
-    
+
     //copy file to cache directory
     if (!@copy($tmpfilename, $filepath)) {
             returnError("Cannot copy temp file to cache");
             exit(1);
      }
-    
+
     //insert cache entry for this build
     $insert_query = "INSERT INTO cache (id, minified) VALUES('$cacheKey', ".$intMin.")";
     $insert_result = mysql_query($insert_query);
@@ -223,7 +225,7 @@ if (!$is_cached) {
             returnError("Cannot insert cache entry for this build");
             exit(1);
         }
-    }      
+    }
 }
 
 //deliver file from cache location to user
@@ -233,7 +235,7 @@ if ($successDeliver===false)
     returnError("Cannot deliver file");
 } else {
     //json formatted output
-    //encapsulate the actual file path, the sender should be able to use 
+    //encapsulate the actual file path, the sender should be able to use
     //just the cacheKey and the min value to generate the filepath.
     echo json_encode(array($cacheKey, $intMin));
 }
